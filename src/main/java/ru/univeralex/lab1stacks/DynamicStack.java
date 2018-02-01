@@ -1,22 +1,64 @@
 package ru.univeralex.lab1stacks;
 
+import ru.univeralex.lab1stacks.api.IStack;
 import ru.univeralex.lab1stacks.exceptions.StackIsEmptyException;
-import ru.univeralex.lab1stacks.exceptions.StackIsFullException;
 
 public class DynamicStack implements IStack {
-    public void push(int value) throws StackIsFullException {
+
+    class StackElement {
+        int value;
+        StackElement previousStackElement;
+
+        StackElement(int value, StackElement previousStackElement) {
+            this.value = value;
+            this.previousStackElement = previousStackElement;
+        }
+
+        private int getValue() {
+            return value;
+        }
+
+        private StackElement getPreviousStackElement() {
+            return previousStackElement;
+        }
 
     }
 
+    private StackElement pointer;
+
+    @Override
+    public void push(int value) {
+            pointer = new StackElement(value, pointer);
+    }
+
+    @Override
     public int pop() throws StackIsEmptyException {
-        return 0;
+        if(isEmpty()) throw new StackIsEmptyException("Can't pop from stack because it is already empty");
+        int value = pointer.getValue();
+        pointer = pointer.getPreviousStackElement();
+        return value;
     }
 
+    @Override
     public boolean isEmpty() {
-        return false;
+        return pointer == null;
     }
 
+    @Override
     public boolean isFull() {
-        return false;
+        throw new UnsupportedOperationException("Can't check is full or not for dynamic stack!");
     }
+
+    @Override
+    public String getElementsString() {
+        StackElement current = pointer;
+        String result = Integer.toString(current.getValue());
+        current = current.previousStackElement;
+        while(current != null) {
+            result += ", " + current.getValue();
+            current = current.previousStackElement;
+        }
+        return result;
+    }
+
 }

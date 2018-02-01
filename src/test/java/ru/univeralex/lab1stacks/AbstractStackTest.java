@@ -1,18 +1,14 @@
 package ru.univeralex.lab1stacks;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
+import ru.univeralex.lab1stacks.api.IStack;
 import ru.univeralex.lab1stacks.exceptions.StackIsEmptyException;
 import ru.univeralex.lab1stacks.exceptions.StackIsFullException;
 
-public class StackTest {
-    IStack emptyStack;
+public class AbstractStackTest {
 
-    @Before
-    public void setUp() {
-        this.emptyStack = new StaticStack(10);
-    }
+    protected IStack emptyStack;
 
     @Test
     public void IsEmptyTest(){
@@ -20,7 +16,7 @@ public class StackTest {
     }
 
     @Test
-    public void pushTest() throws StackIsFullException, StackIsEmptyException {
+    public void pushTest() throws StackIsFullException {
         this.emptyStack.push(1);
         Assert.assertEquals( false, this.emptyStack.isEmpty());
     }
@@ -33,17 +29,7 @@ public class StackTest {
     }
 
     @Test
-    public void isFullTest() throws StackIsFullException {
-        for(int i = 0 ; i < 9; i++){
-            Assert.assertEquals(false, this.emptyStack.isFull());
-            this.emptyStack.push(i);
-        }
-        this.emptyStack.push(10);
-        Assert.assertEquals(true, this.emptyStack.isFull());
-    }
-
-    @Test
-    public void fullTest() throws StackIsFullException, StackIsEmptyException {
+    public void pushPopTest() throws StackIsEmptyException, StackIsFullException {
         for(int i = 0 ; i < 10; i++){
             this.emptyStack.push(i);
         }
@@ -59,10 +45,12 @@ public class StackTest {
         this.emptyStack.pop();
     }
 
-    @Test(expected = StackIsFullException.class)
-    public void TestStackIsFullException() throws StackIsFullException {
-        for(int i = 0 ; i < 11; i++){
-           this.emptyStack.push(i);
+    @Test
+    public void toStringTest() throws StackIsFullException {
+        for(int i = 0 ; i < 10; i++){
+            this.emptyStack.push(i);
         }
+        Assert.assertEquals("9, 8, 7, 6, 5, 4, 3, 2, 1, 0", this.emptyStack.getElementsString());
     }
+
 }

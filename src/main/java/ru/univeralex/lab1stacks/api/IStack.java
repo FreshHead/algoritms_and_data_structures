@@ -1,4 +1,4 @@
-package ru.univeralex.lab1stacks;
+package ru.univeralex.lab1stacks.api;
 
 import ru.univeralex.lab1stacks.exceptions.StackIsEmptyException;
 import ru.univeralex.lab1stacks.exceptions.StackIsFullException;
@@ -11,5 +11,7 @@ public interface IStack {
     boolean isEmpty();
 
     boolean isFull();
+
+    String getElementsString();
 
 }
