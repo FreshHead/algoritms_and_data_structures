@@ -49,4 +49,12 @@ public class StaticStack implements IStack {
         }
         return result;
     }
+
+    public int getSize() {
+        return this.size;
+    }
+
+    public int getIndexOfCurrent() {
+        return this.pointer;
+    }
 }

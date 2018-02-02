@@ -28,12 +28,12 @@ public class DynamicStack implements IStack {
 
     @Override
     public void push(int value) {
-            pointer = new StackElement(value, pointer);
+        pointer = new StackElement(value, pointer);
     }
 
     @Override
     public int pop() throws StackIsEmptyException {
-        if(isEmpty()) throw new StackIsEmptyException("Can't pop from stack because it is already empty");
+        if (isEmpty()) throw new StackIsEmptyException("Can't pop from stack because it is already empty");
         int value = pointer.getValue();
         pointer = pointer.getPreviousStackElement();
         return value;
@@ -54,7 +54,7 @@ public class DynamicStack implements IStack {
         StackElement current = pointer;
         String result = Integer.toString(current.getValue());
         current = current.previousStackElement;
-        while(current != null) {
+        while (current != null) {
             result += ", " + current.getValue();
             current = current.previousStackElement;
         }
