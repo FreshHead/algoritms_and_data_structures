@@ -3,11 +3,11 @@ package ru.univeralex.lab5sorting_algorithms;
 import org.junit.Assert;
 import org.junit.Test;
 import ru.univeralex.lab5sorting_algorithms.api.Sorter;
-import ru.univeralex.utils.ArrayToStringConverter;
+import ru.univeralex.utils.ArrayConverter;
 
 public class AbstractSorterTest {
     Sorter sorter;
-    private ArrayToStringConverter converter = new ArrayToStringConverter();
+    private ArrayConverter converter = new ArrayConverter();
 
     @Test
     public void alreadySortedTest() {
