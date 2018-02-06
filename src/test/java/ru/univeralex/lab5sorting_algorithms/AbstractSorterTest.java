@@ -4,6 +4,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import ru.univeralex.lab5sorting_algorithms.api.Sorter;
 import ru.univeralex.utils.ArrayConverter;
+import ru.univeralex.utils.ArrayGenerator;
+import ru.univeralex.utils.SortingChecker;
 
 public class AbstractSorterTest {
     Sorter sorter;
@@ -32,4 +34,16 @@ public class AbstractSorterTest {
                 converter.convert(sorter.sort(new int[]{9, 3, 7, 4, 9, 4, 3, 4, 1, 1}))
         );
     }
+
+    @Test
+    public void testWithRandom() {
+        Assert.assertEquals(
+                true,
+                SortingChecker.isSorted(
+                        sorter.sort(ArrayGenerator.generate(100, 1000))
+                )
+        );
+    }
+
+
 }

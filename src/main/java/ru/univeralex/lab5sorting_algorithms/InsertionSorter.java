@@ -10,8 +10,8 @@ public class InsertionSorter implements Sorter {
     public int[] sort(int[] array) {
         ArrayList<Integer> sortedList = new ArrayList<>(10);
 
-        for (int i : array) {
-            getSortedWithValue(sortedList, array[i]);
+        for (int current : array) {
+            getSortedWithValue(sortedList, current);
         }
         Integer[] integers = new Integer[array.length];
         sortedList.toArray(integers);
