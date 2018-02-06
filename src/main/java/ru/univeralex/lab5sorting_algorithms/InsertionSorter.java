@@ -15,7 +15,7 @@ public class InsertionSorter implements Sorter {
         }
         Integer[] integers = new Integer[array.length];
         sortedList.toArray(integers);
-        return new ArrayConverter().convert(integers);
+        return ArrayConverter.convert(integers);
     }
 
     private void getSortedWithValue(ArrayList<Integer> sortedList, int value) {
