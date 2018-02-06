@@ -107,8 +107,8 @@ public class Main {
                 return;
             }
         }
+        Random random = new Random();
         for (int i = 0; i < amountToPush; i++) {
-            Random random = new Random();
             stack.push(random.nextInt(100));
         }
     }
