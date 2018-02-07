@@ -39,7 +39,7 @@ public class AbstractSorterTest {
         Assert.assertEquals(
                 true,
                 SortingChecker.isSorted(
-                        sorter.sort(ArrayGenerator.generate(100, 1000))
+                        sorter.sort(ArrayGenerator.generate(100, 100))
                 )
         );
     }
