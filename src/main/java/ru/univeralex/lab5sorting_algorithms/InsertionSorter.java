@@ -1,7 +1,7 @@
 package ru.univeralex.lab5sorting_algorithms;
 
 import ru.univeralex.lab5sorting_algorithms.api.Sorter;
-import ru.univeralex.utils.ArrayConverter;
+import ru.univeralex.utils.ArrayUtils;
 
 import java.util.ArrayList;
 
@@ -15,7 +15,7 @@ public class InsertionSorter implements Sorter {
         }
         Integer[] integers = new Integer[array.length];
         sortedList.toArray(integers);
-        return ArrayConverter.convert(integers);
+        return ArrayUtils.convert(integers);
     }
 
     private void getSortedWithValue(ArrayList<Integer> sortedList, int value) {
