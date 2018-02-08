@@ -1,6 +1,7 @@
 package ru.univeralex.lab5sorting_algorithms;
 
 import ru.univeralex.lab5sorting_algorithms.api.Sorter;
+import ru.univeralex.utils.ArrayUtils;
 
 public class QuickSorter implements Sorter {
     private int[] array;
@@ -26,16 +27,10 @@ public class QuickSorter implements Sorter {
             while (array[++i] < array[low]) if (i == high) break;
             while (array[--j] > array[low]) if (j == low) break;
             if (i >= j) break;
-            swap(array, i, j);
+            ArrayUtils.swap(array, i, j);
         }
-        swap(array, low, j);
+        ArrayUtils.swap(array, low, j);
         return j;
-    }
-
-    private void swap(int[] array, int i, int j) {
-        int temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
     }
 
 }
