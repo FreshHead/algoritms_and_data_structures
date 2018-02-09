@@ -2,7 +2,6 @@ package ru.univeralex.lab1stacks;
 
 import ru.univeralex.lab1stacks.api.IQueue;
 import ru.univeralex.lab1stacks.exceptions.QueueIsEmptyException;
-import ru.univeralex.lab1stacks.exceptions.QueueIsFullException;
 
 public class DynamicQueue implements IQueue {
     class QueueElement {
@@ -19,7 +18,6 @@ public class DynamicQueue implements IQueue {
         private int getValue() {
             return value;
         }
-
         private QueueElement getPreviousQueueElement() {
             return previousQueueElement;
         }
@@ -68,11 +66,11 @@ public class DynamicQueue implements IQueue {
     @Override
     public String getElementsString() {
         QueueElement current = first.getNextQueueElement();
-        String result = String.valueOf(first.getValue());
+        StringBuilder result = new StringBuilder(String.valueOf(first.getValue()));
         while(current != null) {
-            result += ", " + current.getValue();
+            result.append(", ").append(current.getValue());
             current = current.getNextQueueElement();
         }
-        return result;
+        return result.toString();
     }
 }
