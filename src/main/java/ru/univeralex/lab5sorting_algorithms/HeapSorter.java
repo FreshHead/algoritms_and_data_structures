@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 public class HeapSorter implements Sorter {
     @Override
-    public int[] sort(int[] array) {
+    public int[] getSorted(int[] array) {
         int[] startOnOneArray = new int[array.length + 1];
         for (int i = 1; i < startOnOneArray.length; i++) startOnOneArray[i] = array[i - 1];
 
@@ -17,9 +17,9 @@ public class HeapSorter implements Sorter {
             ArrayUtils.swap(startOnOneArray, 1, N--);
             sink(startOnOneArray, 1, N);
         }
-
-        Arrays.setAll(array, i -> startOnOneArray[i + 1]);
-        return array;
+        int[] resultingArray = new int[array.length];
+        Arrays.setAll(resultingArray, i -> startOnOneArray[i + 1]);
+        return resultingArray;
     }
 
     private void sink(int[] array, int k, int N) {

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class InsertionSorter implements Sorter {
     @Override
-    public int[] sort(int[] array) {
+    public int[] getSorted(int[] array) {
         ArrayList<Integer> sortedList = new ArrayList<>(10);
 
         for (int current : array) {

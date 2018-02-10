@@ -2,19 +2,22 @@ package ru.univeralex.lab5sorting_algorithms;
 
 import ru.univeralex.lab5sorting_algorithms.api.Sorter;
 
+import java.util.Arrays;
+
 public class BubbleSorter implements Sorter {
     @Override
-    public int[] sort(int[] array) {
+    public int[] getSorted(int[] array) {
+        int[] resultingArray = Arrays.copyOf(array, array.length);
         int smaller_element;
-        for (int i = 0; i < array.length; i++) {
+        for (int i = 0; i < resultingArray.length; i++) {
             for (int j = array.length - 1; j > i; j--) {
-                if (array[j] < array[j - 1]) {
-                    smaller_element = array[j];
-                    array[j] = array[j - 1];
-                    array[j - 1] = smaller_element;
+                if (resultingArray[j] < resultingArray[j - 1]) {
+                    smaller_element = resultingArray[j];
+                    resultingArray[j] = resultingArray[j - 1];
+                    resultingArray[j - 1] = smaller_element;
                 }
             }
         }
-        return array;
+        return resultingArray;
     }
 }

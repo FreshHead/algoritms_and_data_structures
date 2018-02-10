@@ -4,7 +4,7 @@ import ru.univeralex.lab5sorting_algorithms.api.Sorter;
 
 public class SelectionSorter implements Sorter {
     @Override
-    public int[] sort(int[] array) {
+    public int[] getSorted(int[] array) {
         int[] resultArray = new int[array.length];
         for (int i = 0; i < array.length; i++) {
             int indexOfSmallest = getIndexOfSmallest(array);

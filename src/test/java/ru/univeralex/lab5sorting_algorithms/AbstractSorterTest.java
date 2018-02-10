@@ -12,7 +12,7 @@ public class AbstractSorterTest {
     public void alreadySortedTest() {
         Assert.assertEquals(
                 ArrayUtils.convert(new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}),
-                ArrayUtils.convert(sorter.sort(new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}))
+                ArrayUtils.convert(sorter.getSorted(new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}))
         );
     }
 
@@ -20,7 +20,7 @@ public class AbstractSorterTest {
     public void sortReversedTest() {
         Assert.assertEquals(
                 ArrayUtils.convert(new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}),
-                ArrayUtils.convert(sorter.sort(new int[]{9, 8, 7, 6, 5, 4, 3, 2, 1, 0}))
+                ArrayUtils.convert(sorter.getSorted(new int[]{9, 8, 7, 6, 5, 4, 3, 2, 1, 0}))
         );
     }
 
@@ -28,7 +28,7 @@ public class AbstractSorterTest {
     public void sortNotUniqueTest() {
         Assert.assertEquals(
                 ArrayUtils.convert(new int[]{1, 1, 3, 3, 4, 4, 4, 7, 9, 9}),
-                ArrayUtils.convert(sorter.sort(new int[]{9, 3, 7, 4, 9, 4, 3, 4, 1, 1}))
+                ArrayUtils.convert(sorter.getSorted(new int[]{9, 3, 7, 4, 9, 4, 3, 4, 1, 1}))
         );
     }
 
@@ -37,7 +37,7 @@ public class AbstractSorterTest {
         Assert.assertEquals(
                 true,
                 ArrayUtils.isSorted(
-                        sorter.sort(ArrayUtils.generate(100, 100))
+                        sorter.getSorted(ArrayUtils.generate(100, 100_000))
                 )
         );
     }

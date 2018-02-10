@@ -3,14 +3,15 @@ package ru.univeralex.lab5sorting_algorithms;
 import ru.univeralex.lab5sorting_algorithms.api.Sorter;
 import ru.univeralex.utils.ArrayUtils;
 
+import java.util.Arrays;
+
 public class QuickSorter implements Sorter {
-    private int[] array;
 
     @Override
-    public int[] sort(int[] array) {
-        this.array = array;
-        sort(this.array, 0, this.array.length - 1);
-        return this.array;
+    public int[] getSorted(int[] array) {
+        int[] resultingArray = Arrays.copyOf(array, array.length);
+        sort(resultingArray, 0, resultingArray.length - 1);
+        return resultingArray;
     }
 
     private void sort(int[] array, int low, int high) {

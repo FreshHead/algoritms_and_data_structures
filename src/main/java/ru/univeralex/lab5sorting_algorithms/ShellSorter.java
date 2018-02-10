@@ -3,29 +3,32 @@ package ru.univeralex.lab5sorting_algorithms;
 import ru.univeralex.lab5sorting_algorithms.api.Sorter;
 import ru.univeralex.utils.Calculator;
 
+import java.util.Arrays;
+
 public class ShellSorter implements Sorter {
     private int[] steps = new int[]{1, 3, 7, 15, 31, 63, 127, 255, 511, 1023, 2047, 4095, 8191};
     private Sorter sorter = new SelectionSorter();
 
     @Override
-    public int[] sort(int[] array) {
+    public int[] getSorted(int[] array) {
+        int[] resultingArray = new int[array.length];
         for (int i = getNumberOfSteps(array) - 1; i >= 0; i--) {
-            array = sortEveryNth(steps[i], array);
+            resultingArray = getSortedNthStep(steps[i], array);
         }
-        return array;
+        return resultingArray;
     }
 
     private int getNumberOfSteps(int[] array) {
         return Calculator.absoluteLogOfBase2(array.length) - 1;
     }
 
-    private int[] sortEveryNth(int n, int[] array) {
-        int[] sortedNthArray = sorter.sort(getEveryNth(n, array));
-
+    private int[] getSortedNthStep(int n, int[] array) {
+        int[] sortedNthArray = sorter.getSorted(getEveryNth(n, array));
+        int[] resultingArray = Arrays.copyOf(array, array.length);
         for (int i = 0, index = n - 1; i < sortedNthArray.length; i++, index += n) {
-            array[index] = sortedNthArray[i];
+            resultingArray[index] = sortedNthArray[i];
         }
-        return array;
+        return resultingArray;
     }
 
     protected int[] getEveryNth(int n, int[] array) {
