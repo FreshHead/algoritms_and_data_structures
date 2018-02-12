@@ -8,12 +8,6 @@ import ru.univeralex.lab5sorting_algorithms.QuickSorter;
 import ru.univeralex.utils.ArrayUtils;
 
 public class BalancedTree {
-    private Node rootNode;
-
-    public BalancedTree(int vertices) {
-        this(ArrayUtils.generate(100, vertices));
-    }
-
     protected BalancedTree(int[] array) {
         int[] sortedArray = new QuickSorter().getSorted(array);
 
@@ -25,8 +19,20 @@ public class BalancedTree {
                 e.printStackTrace();
             }
         }
-
         rootNode = addNodes(array.length, stack);
+        directTraversal(rootNode, 0);
+    }
+
+    private Node rootNode;
+
+    public BalancedTree(int vertices) {
+        this(ArrayUtils.generate(100, vertices));
+    }
+
+    private void directTraversal(Node node, int level) {
+        System.out.println(getTabs(level) + node.value);
+        if (node.leftChild != null) directTraversal(node.leftChild, level + 1);
+        if (node.rightChild != null) directTraversal(node.rightChild, level + 1);
     }
 
     private Node addNodes(int nodesCount, IStack valuesStack) {
@@ -48,6 +54,12 @@ public class BalancedTree {
         return currentNode;
     }
 
+    private String getTabs(int count) {
+        String result = "";
+        for (int i = 0; i < count; i++) result += "\t";
+        return result;
+    }
+
     class Node {
         int value;
         Node leftChild;
@@ -57,4 +69,6 @@ public class BalancedTree {
             this.value = value;
         }
     }
+
+
 }
