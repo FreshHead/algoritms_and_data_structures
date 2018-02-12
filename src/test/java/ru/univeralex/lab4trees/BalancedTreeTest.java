@@ -2,9 +2,9 @@ package ru.univeralex.lab4trees;
 
 import org.junit.Test;
 
-public class PerfectlyBalancedTreeTest {
+public class BalancedTreeTest {
     @Test
     public void constructorTest() {
-        PerfectlyBalancedTree tree = new PerfectlyBalancedTree(10);
+        BalancedTree tree = new BalancedTree(10);
     }
 }

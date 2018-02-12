@@ -1,9 +1,10 @@
 package ru.univeralex.lab1stacks.api;
 
 import ru.univeralex.lab1stacks.exceptions.StackIsEmptyException;
+import ru.univeralex.lab1stacks.exceptions.StackIsFullException;
 
 public interface IStack {
-    void push(int value);
+    void push(int value) throws StackIsFullException;
 
     int pop() throws StackIsEmptyException;
 
