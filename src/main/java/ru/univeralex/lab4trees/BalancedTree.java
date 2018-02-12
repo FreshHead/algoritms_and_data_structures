@@ -4,7 +4,7 @@ import ru.univeralex.lab1stacks.DynamicStack;
 import ru.univeralex.lab1stacks.api.IStack;
 import ru.univeralex.lab1stacks.exceptions.StackIsEmptyException;
 import ru.univeralex.lab1stacks.exceptions.StackIsFullException;
-import ru.univeralex.lab5sorting_algorithms.QuickSorter;
+import ru.univeralex.lab5sorting.QuickSorter;
 import ru.univeralex.utils.ArrayUtils;
 
 class BalancedTree {

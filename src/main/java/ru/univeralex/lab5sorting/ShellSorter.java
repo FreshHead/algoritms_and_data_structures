@@ -1,19 +1,19 @@
-package ru.univeralex.lab5sorting_algorithms;
+package ru.univeralex.lab5sorting;
 
-import ru.univeralex.lab5sorting_algorithms.api.Sorter;
+import ru.univeralex.lab5sorting.api.Sorter;
 import ru.univeralex.utils.Calculator;
 
 import java.util.Arrays;
 
 public class ShellSorter implements Sorter {
-    private int[] steps = new int[]{1, 3, 7, 15, 31, 63, 127, 255, 511, 1023, 2047, 4095, 8191};
     private Sorter sorter = new SelectionSorter();
 
     @Override
     public int[] getSorted(int[] array) {
         int[] resultingArray = new int[array.length];
-        for (int i = getNumberOfSteps(array) - 1; i >= 0; i--) {
-            resultingArray = getSortedNthStep(steps[i], array);
+        for (int i = getNumberOfSteps(array) - 1; i > 0; i--) {
+            int step = (int) (Math.pow(2, i) - 1);
+            resultingArray = getSortedNthStep(step, array);
         }
         return resultingArray;
     }

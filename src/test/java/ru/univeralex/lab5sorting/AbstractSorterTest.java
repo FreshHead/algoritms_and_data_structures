@@ -1,8 +1,8 @@
-package ru.univeralex.lab5sorting_algorithms;
+package ru.univeralex.lab5sorting;
 
 import org.junit.Assert;
 import org.junit.Test;
-import ru.univeralex.lab5sorting_algorithms.api.Sorter;
+import ru.univeralex.lab5sorting.api.Sorter;
 import ru.univeralex.utils.ArrayUtils;
 
 public class AbstractSorterTest {
@@ -37,7 +37,7 @@ public class AbstractSorterTest {
         Assert.assertEquals(
                 true,
                 ArrayUtils.isSorted(
-                        sorter.getSorted(ArrayUtils.generate(100, 100_000))
+                        sorter.getSorted(ArrayUtils.generate(100, 100_00))
                 )
         );
     }

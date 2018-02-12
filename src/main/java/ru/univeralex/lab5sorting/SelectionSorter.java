@@ -1,6 +1,6 @@
-package ru.univeralex.lab5sorting_algorithms;
+package ru.univeralex.lab5sorting;
 
-import ru.univeralex.lab5sorting_algorithms.api.Sorter;
+import ru.univeralex.lab5sorting.api.Sorter;
 
 public class SelectionSorter implements Sorter {
     @Override

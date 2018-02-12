@@ -1,6 +1,6 @@
-package ru.univeralex.lab5sorting_algorithms;
+package ru.univeralex.lab5sorting;
 
-import ru.univeralex.lab5sorting_algorithms.api.Sorter;
+import ru.univeralex.lab5sorting.api.Sorter;
 
 import java.util.Arrays;
 

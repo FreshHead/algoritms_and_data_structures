@@ -1,4 +1,4 @@
-package ru.univeralex.lab5sorting_algorithms;
+package ru.univeralex.lab5sorting;
 
 import org.junit.Assert;
 import org.junit.Before;
