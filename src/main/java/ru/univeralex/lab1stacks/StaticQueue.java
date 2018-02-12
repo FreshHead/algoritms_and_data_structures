@@ -43,13 +43,13 @@ public class StaticQueue implements IQueue {
 
     @Override
     public String getElementsString() {
-        String result = Integer.toString(elements[first]);
+        StringBuilder result = new StringBuilder(Integer.toString(elements[first]));
         int current = first;
         for (int i = 1; i < amount; i++) {
             if(current > size) current = -1;
-            result += ", " + elements[++current];
+            result.append(", ").append(elements[++current]);
         }
-        return result;
+        return result.toString();
     }
 
 }

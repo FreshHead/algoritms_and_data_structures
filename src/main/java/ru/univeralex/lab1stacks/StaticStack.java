@@ -43,11 +43,11 @@ public class StaticStack implements IStack {
 
     @Override
     public String getElementsString() {
-        String result = Integer.toString(elements[pointer]);
+        StringBuilder result = new StringBuilder(Integer.toString(elements[pointer]));
         for (int i = pointer - 1; i >= 0; i--) {
-            result += ", " + elements[i];
+            result.append(", ").append(elements[i]);
         }
-        return result;
+        return result.toString();
     }
 
     public int getSize() {

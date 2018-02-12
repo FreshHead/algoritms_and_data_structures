@@ -52,13 +52,13 @@ public class DynamicStack implements IStack {
     @Override
     public String getElementsString() {
         StackElement current = pointer;
-        String result = Integer.toString(current.getValue());
+        StringBuilder result = new StringBuilder(Integer.toString(current.getValue()));
         current = current.previousStackElement;
         while (current != null) {
-            result += ", " + current.getValue();
+            result.append(", ").append(current.getValue());
             current = current.previousStackElement;
         }
-        return result;
+        return result.toString();
     }
 
 }
