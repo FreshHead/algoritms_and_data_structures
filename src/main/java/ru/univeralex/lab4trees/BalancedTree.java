@@ -7,8 +7,12 @@ import ru.univeralex.lab1stacks.exceptions.StackIsFullException;
 import ru.univeralex.lab5sorting_algorithms.QuickSorter;
 import ru.univeralex.utils.ArrayUtils;
 
-public class BalancedTree {
-    protected BalancedTree(int[] array) {
+class BalancedTree {
+    BalancedTree(int vertices) {
+        this(ArrayUtils.generate(100, vertices));
+    }
+
+    private BalancedTree(int[] array) {
         int[] sortedArray = new QuickSorter().getSorted(array);
 
         IStack stack = new DynamicStack();
@@ -19,20 +23,21 @@ public class BalancedTree {
                 e.printStackTrace();
             }
         }
-        rootNode = addNodes(array.length, stack);
+        Node rootNode = addNodes(array.length, stack);
+        System.out.println("Прямой обход:");
         directTraversal(rootNode, 0);
-    }
-
-    private Node rootNode;
-
-    public BalancedTree(int vertices) {
-        this(ArrayUtils.generate(100, vertices));
+        System.out.println("Симметричный обход:");
+        symmetricTraversal(rootNode, 0);
+        System.out.println("Обратный обход:");
+        reverseTraversal(rootNode, 0);
     }
 
     private void directTraversal(Node node, int level) {
         System.out.println(getTabs(level) + node.value);
-        if (node.leftChild != null) directTraversal(node.leftChild, level + 1);
-        if (node.rightChild != null) directTraversal(node.rightChild, level + 1);
+        if (node.leftChild != null)
+            directTraversal(node.leftChild, level + 1);
+        if (node.rightChild != null)
+            directTraversal(node.rightChild, level + 1);
     }
 
     private Node addNodes(int nodesCount, IStack valuesStack) {
@@ -54,10 +59,26 @@ public class BalancedTree {
         return currentNode;
     }
 
+    private void symmetricTraversal(Node node, int level) {
+        if (node.leftChild != null)
+            symmetricTraversal(node.leftChild, level + 1);
+        System.out.println(getTabs(level) + node.value);
+        if (node.rightChild != null)
+            symmetricTraversal(node.rightChild, level + 1);
+    }
+
+    private void reverseTraversal(Node node, int level) {
+        if (node.leftChild != null)
+            reverseTraversal(node.leftChild, level + 1);
+        if (node.rightChild != null)
+            reverseTraversal(node.rightChild, level);
+        System.out.println(getTabs(level) + node.value);
+    }
+
     private String getTabs(int count) {
-        String result = "";
-        for (int i = 0; i < count; i++) result += "\t";
-        return result;
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < count; i++) result.append("\t");
+        return result.toString();
     }
 
     class Node {
@@ -69,6 +90,4 @@ public class BalancedTree {
             this.value = value;
         }
     }
-
-
 }
