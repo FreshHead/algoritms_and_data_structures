@@ -10,7 +10,7 @@ public class AbstractListTest {
     IList list;
 
     @Test
-    public void insertAfterTest() throws NoSuchItemException {
+    public void insertAfterTest() throws NoSuchItemException, ListIsFullException {
         list.insertAfter(1, 10);
         Assert.assertEquals("10", list.getListItemValues());
         list.insertAfter(0, 12);
@@ -22,7 +22,7 @@ public class AbstractListTest {
     }
 
     @Test(expected = NoSuchItemException.class)
-    public void insertAfterToBigIndexTest() throws NoSuchItemException {
+    public void insertAfterToBigIndexTest() throws NoSuchItemException, ListIsFullException {
         list.insertAfter(0, 10);
         Assert.assertEquals("10", list.getListItemValues());
         list.insertAfter(1, 12);
@@ -82,14 +82,14 @@ public class AbstractListTest {
     }
 
     @Test(expected = NoSuchItemException.class)
-    public void deleteNonExistentIndexTest() throws NoSuchItemException {
+    public void deleteNonExistentIndexTest() throws NoSuchItemException, ListIsFullException {
         list.insertAfter(0, 10);
         Assert.assertEquals(false, list.isEmpty());
         list.delete(1);
     }
 
     @Test
-    public void deleteTest() throws NoSuchItemException {
+    public void deleteTest() throws NoSuchItemException, ListIsFullException {
         list.insertAfter(0, 10);
         list.delete(0);
         Assert.assertEquals(true, list.isEmpty());

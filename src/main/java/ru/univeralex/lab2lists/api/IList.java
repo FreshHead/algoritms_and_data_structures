@@ -7,7 +7,7 @@ public interface IList {
 
     void insertBefore(int index, int value) throws ListIsFullException, NoSuchItemException;
 
-    void insertAfter(int index, int value) throws NoSuchItemException;
+    void insertAfter(int index, int value) throws NoSuchItemException, ListIsFullException;
 
     void delete(int index) throws NoSuchItemException;
 
