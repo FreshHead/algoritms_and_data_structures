@@ -43,8 +43,23 @@ public class DynamicList implements IList {
     }
 
     @Override
-    public void delete(int index) {
-
+    public void delete(int index) throws NoSuchItemException {
+        ListItem current = head;
+        ListItem previous = null;
+        if (head == null) {
+            throw new NoSuchItemException("Can't delete because list is empty!");
+        }
+        if (index == 0) {
+            head = null;
+            return;
+        }
+        for (int i = 0; i < index; i++) {
+            if (current.next == null)
+                throw new NoSuchItemException("Can't delete element with index: " + index + ". No such index!");
+            previous = current;
+            current = current.next;
+        }
+        previous.next = current.next;
     }
 
     @Override

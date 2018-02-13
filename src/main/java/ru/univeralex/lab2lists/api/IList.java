@@ -9,7 +9,7 @@ public interface IList {
 
     void insertAfter(int index, int value) throws NoSuchItemException;
 
-    void delete(int index);
+    void delete(int index) throws NoSuchItemException;
 
     int findFirst(int value) throws NoSuchItemException;
 

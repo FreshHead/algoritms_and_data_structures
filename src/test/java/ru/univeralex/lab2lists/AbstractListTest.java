@@ -68,4 +68,36 @@ public class AbstractListTest {
         Assert.assertEquals(1, list.findFirst(14));
         Assert.assertEquals(3, list.findFirst(10));
     }
+
+    @Test
+    public void isEmptyTest() throws NoSuchItemException, ListIsFullException {
+        Assert.assertEquals(true, list.isEmpty());
+        list.insertBefore(0, 10);
+        Assert.assertEquals(false, list.isEmpty());
+    }
+
+    @Test(expected = NoSuchItemException.class)
+    public void deleteInEmptyTest() throws NoSuchItemException {
+        list.delete(0);
+    }
+
+    @Test(expected = NoSuchItemException.class)
+    public void deleteNonExistentIndexTest() throws NoSuchItemException {
+        list.insertAfter(0, 10);
+        Assert.assertEquals(false, list.isEmpty());
+        list.delete(1);
+    }
+
+    @Test
+    public void deleteTest() throws NoSuchItemException {
+        list.insertAfter(0, 10);
+        list.delete(0);
+        Assert.assertEquals(true, list.isEmpty());
+        list.insertAfter(0, 10);
+        list.insertAfter(0, 11);
+        list.insertAfter(1, 12);
+        list.delete(1);
+        Assert.assertEquals("10, 12", list.getListItemValues());
+    }
+
 }
