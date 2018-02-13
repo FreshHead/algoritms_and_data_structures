@@ -51,7 +51,7 @@ public class DynamicList implements IList {
     public int findFirst(int value) throws NoSuchItemException {
         ListItem current = head;
         int index = 0;
-        while (current.next != null) {
+        while (current != null) {
             if (current.value == value)
                 return index;
             index++;
