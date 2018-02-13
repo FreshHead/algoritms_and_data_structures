@@ -33,15 +33,17 @@ public class StaticList implements IList{
     }
 
     @Override
-    public int findFirst(int value) {
-        for(int i = 0; i < length; i++) {
+    public void delete(int index) {
 
-        }
+    }
+
+    @Override
+    public int findFirst(int value) {
         return 0;
     }
 
     @Override
-    public String getElementsValueString() {
+    public String getListItemValues() {
         return null;
     }
 
