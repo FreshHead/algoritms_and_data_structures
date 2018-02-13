@@ -1,13 +1,13 @@
 package ru.univeralex.lab2lists;
 
 import ru.univeralex.lab2lists.api.IList;
-import ru.univeralex.lab2lists.exceptions.NoItemException;
+import ru.univeralex.lab2lists.exceptions.NoSuchItemException;
 
 public class DynamicList implements IList {
     private ListItem head;
 
     @Override
-    public void insertBefore(int index, int value) throws NoItemException {
+    public void insertBefore(int index, int value) throws NoSuchItemException {
         ListItem current = head;
         ListItem previous = null;
         if (head == null) {
@@ -20,7 +20,7 @@ public class DynamicList implements IList {
         }
         for (int i = 0; i < index; i++) {
             if (current.next == null)
-                throw new NoItemException("Can't insert before element with index: " + index + ". No such index!");
+                throw new NoSuchItemException("Can't insert before element with index: " + index + ". No such index!");
             previous = current;
             current = current.next;
         }
@@ -28,7 +28,7 @@ public class DynamicList implements IList {
     }
 
     @Override
-    public void insertAfter(int index, int value) throws NoItemException {
+    public void insertAfter(int index, int value) throws NoSuchItemException {
         ListItem current = head;
         if (head == null) {
             head = new ListItem(value);
@@ -36,7 +36,7 @@ public class DynamicList implements IList {
         }
         for (int i = 0; i < index; i++) {
             if (current.next == null)
-                throw new NoItemException("Can't insert after element with index: " + index + ". No such index!");
+                throw new NoSuchItemException("Can't insert after element with index: " + index + ". No such index!");
             current = current.next;
         }
         current.next = new ListItem(value, current.next);
@@ -48,8 +48,16 @@ public class DynamicList implements IList {
     }
 
     @Override
-    public int findFirst(int value) {
-        return 0;
+    public int findFirst(int value) throws NoSuchItemException {
+        ListItem current = head;
+        int index = 0;
+        while (current.next != null) {
+            if (current.value == value)
+                return index;
+            index++;
+            current = current.next;
+        }
+        throw new NoSuchItemException("Can't find item with value:" + value);
     }
 
     @Override
