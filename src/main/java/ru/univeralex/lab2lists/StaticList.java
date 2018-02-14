@@ -39,9 +39,7 @@ public class StaticList implements IList {
     }
 
     private void shiftToTheRight(int fromIndex) {
-        for (int i = length; i > fromIndex; i--) {
-            items[i + 1] = items[i];
-        }
+        System.arraycopy(items, fromIndex + 1, items, fromIndex + 1 + 1, length - fromIndex);
     }
 
     @Override
@@ -53,9 +51,7 @@ public class StaticList implements IList {
     }
 
     private void shiftToTheLeft(int toIndex) {
-        for (int i = toIndex; i < length; i++) {
-            items[i] = items[i + 1];
-        }
+        System.arraycopy(items, toIndex + 1, items, toIndex, length - toIndex);
     }
 
     @Override
