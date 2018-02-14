@@ -6,6 +6,7 @@ import ru.univeralex.lab2lists.exceptions.NoSuchItemException;
 
 public class BidirectionalList implements IList {
     private ListItem head;
+    private int length = 0;
 
     @Override
     public void insertBefore(int index, int value) throws NoSuchItemException {
@@ -14,6 +15,7 @@ public class BidirectionalList implements IList {
             head = new ListItem(value);
             head.next = head;
             head.prev = head;
+            length++;
             return;
         }
 
@@ -23,6 +25,7 @@ public class BidirectionalList implements IList {
             current = current.next;
         }
         current.prev = current.prev.next = new ListItem(value, current.prev, current);
+        length++;
         if (index == 0)
             head = current.prev;
     }
@@ -34,6 +37,7 @@ public class BidirectionalList implements IList {
             head = new ListItem(value);
             head.next = head;
             head.prev = head;
+            length++;
             return;
         }
         for (int i = 0; i < index; i++) {
@@ -44,12 +48,12 @@ public class BidirectionalList implements IList {
 
         current.next = new ListItem(value, current, current.next);
         current.next.next.prev = current.next;
-
+        length++;
     }
 
     @Override
     public void delete(int index) throws NoSuchItemException {
-
+        length--;
     }
 
     @Override
@@ -66,7 +70,15 @@ public class BidirectionalList implements IList {
     }
 
     public int findFirstInReverse(int value) throws NoSuchItemException {
-        return 0;
+        ListItem current = head.prev;
+        int index = length - 1;
+        do {
+            if (current.value == value)
+                return index;
+            index--;
+            current = current.prev;
+        } while (index != 0);
+        throw new NoSuchItemException("Can't find item with value:" + value);
     }
 
     @Override
