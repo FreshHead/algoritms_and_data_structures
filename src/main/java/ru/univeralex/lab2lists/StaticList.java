@@ -22,18 +22,6 @@ public class StaticList implements IList {
         length++;
     }
 
-//    private void shiftToTheRight(int fromIndex) {
-//        for (int i = fromIndex; i < length; i++) {
-//            items[i + 1] = items[i];
-//        }
-//    }
-
-    private void shiftToTheRight(int fromIndex) {
-        for (int i = length; i > fromIndex; i--) {
-            items[i + 1] = items[i];
-        }
-    }
-
     @Override
     public void insertAfter(int index, int value) throws ListIsFullException, NoSuchItemException {
         if (isFull()) throw new ListIsFullException("Can't insert value: " + value + " because list is full.");
@@ -42,18 +30,30 @@ public class StaticList implements IList {
             length++;
             return;
         }
-        if(length < index + 1)
+        if (length <= index)
             throw new NoSuchItemException("No item with index: " + index );
         if(length != index + 1)
-            shiftToTheRight(index + 1);
+            shiftToTheRight(index);
         items[index + 1] = value;
         length++;
+    }
+
+    private void shiftToTheRight(int fromIndex) {
+        for (int i = length; i > fromIndex; i--) {
+            items[i + 1] = items[i];
+        }
     }
 
     @Override
     public void delete(int index) {
 
     }
+
+//    private void shiftToTheLeft(int fromIndex) {
+//        for (int i = length; i > fromIndex; i--) {
+//            items[i + 1] = items[i];
+//        }
+//    }
 
     @Override
     public int findFirst(int value) {
