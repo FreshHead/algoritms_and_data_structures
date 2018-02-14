@@ -31,8 +31,8 @@ public class StaticList implements IList {
             return;
         }
         if (length <= index)
-            throw new NoSuchItemException("No item with index: " + index );
-        if(length != index + 1)
+            throw new NoSuchItemException("No item with index: " + index);
+        if (length != index + 1)
             shiftToTheRight(index);
         items[index + 1] = value;
         length++;
@@ -45,15 +45,18 @@ public class StaticList implements IList {
     }
 
     @Override
-    public void delete(int index) {
-
+    public void delete(int index) throws NoSuchItemException {
+        if (index + 1 > length)
+            throw new NoSuchItemException("Can't delete item with index: " + index + " ! Because this index does not exist.");
+        shiftToTheLeft(index);
+        length--;
     }
 
-//    private void shiftToTheLeft(int fromIndex) {
-//        for (int i = length; i > fromIndex; i--) {
-//            items[i + 1] = items[i];
-//        }
-//    }
+    private void shiftToTheLeft(int toIndex) {
+        for (int i = toIndex; i < length; i++) {
+            items[i] = items[i + 1];
+        }
+    }
 
     @Override
     public int findFirst(int value) {
