@@ -39,7 +39,7 @@ public class StaticList implements IList {
     }
 
     private void shiftToTheRight(int fromIndex) {
-        System.arraycopy(items, fromIndex + 1, items, fromIndex + 1 + 1, length - fromIndex);
+        System.arraycopy(items, fromIndex, items, fromIndex + 1, length - fromIndex);
     }
 
     @Override
