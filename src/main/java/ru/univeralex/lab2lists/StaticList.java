@@ -55,8 +55,12 @@ public class StaticList implements IList {
     }
 
     @Override
-    public int findFirst(int value) {
-        return 0;
+    public int findFirst(int value) throws NoSuchItemException {
+        for (int i = 0; i < length; i++) {
+            if (items[i] == value)
+                return i;
+        }
+        throw new NoSuchItemException("Can't find item with value:" + value);
     }
 
     @Override
