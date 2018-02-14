@@ -53,6 +53,22 @@ public class BidirectionalList implements IList {
 
     @Override
     public void delete(int index) throws NoSuchItemException {
+        if (index >= length)
+            throw new NoSuchItemException("Can't delete element with index: " + index + ". No such index!");
+        ListItem current = head;
+        if (head == null) {
+            throw new NoSuchItemException("Can't delete because list is empty!");
+        }
+        if (index == 0) {
+            head = null;
+            length--;
+            return;
+        }
+        for (int i = 0; i < index; i++) {
+            current = current.next;
+        }
+        current.prev.next = current.next;
+        current.next.prev = current.prev;
         length--;
     }
 
