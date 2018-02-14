@@ -7,63 +7,63 @@ import ru.univeralex.lab2lists.exceptions.ListIsFullException;
 import ru.univeralex.lab2lists.exceptions.NoSuchItemException;
 
 public class AbstractListTest {
-    IList list;
+    protected IList list;
 
     @Test
     public void insertAfterTest() throws NoSuchItemException, ListIsFullException {
         list.insertAfter(1, 10);
-        Assert.assertEquals("10", list.getListItemValues());
+        Assert.assertEquals("10", list.getItemValues());
         list.insertAfter(0, 12);
-        Assert.assertEquals("10, 12", list.getListItemValues());
+        Assert.assertEquals("10, 12", list.getItemValues());
         list.insertAfter(1, 14);
-        Assert.assertEquals("10, 12, 14", list.getListItemValues());
+        Assert.assertEquals("10, 12, 14", list.getItemValues());
         list.insertAfter(0, 8);
-        Assert.assertEquals("10, 8, 12, 14", list.getListItemValues());
+        Assert.assertEquals("10, 8, 12, 14", list.getItemValues());
     }
 
     @Test(expected = NoSuchItemException.class)
     public void insertAfterToBigIndexTest() throws NoSuchItemException, ListIsFullException {
         list.insertAfter(0, 10);
-        Assert.assertEquals("10", list.getListItemValues());
+        Assert.assertEquals("10", list.getItemValues());
         list.insertAfter(1, 12);
-        Assert.assertEquals("10, 12", list.getListItemValues());
+        Assert.assertEquals("10, 12", list.getItemValues());
     }
 
     @Test
     public void insertBeforeTest() throws NoSuchItemException, ListIsFullException {
         list.insertBefore(0, 10);
-        Assert.assertEquals("10", list.getListItemValues());
+        Assert.assertEquals("10", list.getItemValues());
         list.insertBefore(0, 12);
-        Assert.assertEquals("12, 10", list.getListItemValues());
+        Assert.assertEquals("12, 10", list.getItemValues());
         list.insertBefore(1, 14);
-        Assert.assertEquals("12, 14, 10", list.getListItemValues());
+        Assert.assertEquals("12, 14, 10", list.getItemValues());
         list.insertBefore(2, 8);
-        Assert.assertEquals("12, 14, 8, 10", list.getListItemValues());
+        Assert.assertEquals("12, 14, 8, 10", list.getItemValues());
     }
 
     @Test(expected = NoSuchItemException.class)
     public void findNonExistentTest() throws NoSuchItemException, ListIsFullException {
         list.insertBefore(0, 10);
-        Assert.assertEquals("10", list.getListItemValues());
+        Assert.assertEquals("10", list.getItemValues());
         list.insertBefore(0, 12);
-        Assert.assertEquals("12, 10", list.getListItemValues());
+        Assert.assertEquals("12, 10", list.getItemValues());
         list.insertBefore(1, 14);
-        Assert.assertEquals("12, 14, 10", list.getListItemValues());
+        Assert.assertEquals("12, 14, 10", list.getItemValues());
         list.insertBefore(2, 8);
-        Assert.assertEquals("12, 14, 8, 10", list.getListItemValues());
+        Assert.assertEquals("12, 14, 8, 10", list.getItemValues());
         list.findFirst(101);
     }
 
     @Test
     public void findFirstTest() throws NoSuchItemException, ListIsFullException {
         list.insertBefore(0, 10);
-        Assert.assertEquals("10", list.getListItemValues());
+        Assert.assertEquals("10", list.getItemValues());
         list.insertBefore(0, 12);
-        Assert.assertEquals("12, 10", list.getListItemValues());
+        Assert.assertEquals("12, 10", list.getItemValues());
         list.insertBefore(1, 14);
-        Assert.assertEquals("12, 14, 10", list.getListItemValues());
+        Assert.assertEquals("12, 14, 10", list.getItemValues());
         list.insertBefore(2, 8);
-        Assert.assertEquals("12, 14, 8, 10", list.getListItemValues());
+        Assert.assertEquals("12, 14, 8, 10", list.getItemValues());
         Assert.assertEquals(0, list.findFirst(12));
         Assert.assertEquals(1, list.findFirst(14));
         Assert.assertEquals(3, list.findFirst(10));
@@ -97,7 +97,7 @@ public class AbstractListTest {
         list.insertAfter(0, 11);
         list.insertAfter(1, 12);
         list.delete(1);
-        Assert.assertEquals("10, 12", list.getListItemValues());
+        Assert.assertEquals("10, 12", list.getItemValues());
     }
 
 }

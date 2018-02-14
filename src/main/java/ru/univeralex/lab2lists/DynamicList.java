@@ -76,7 +76,7 @@ public class DynamicList implements IList {
     }
 
     @Override
-    public String getListItemValues() {
+    public String getItemValues() {
         ListItem current = head;
         StringBuilder stringBuilder = new StringBuilder().append(head.value);
         while (current.next != null) {
@@ -114,4 +114,5 @@ public class DynamicList implements IList {
             this.next = next;
         }
     }
+
 }

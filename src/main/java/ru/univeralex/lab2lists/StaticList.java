@@ -64,7 +64,7 @@ public class StaticList implements IList {
     }
 
     @Override
-    public String getListItemValues() {
+    public String getItemValues() {
         StringBuilder result = new StringBuilder(Integer.toString(items[0]));
         for (int i = 1; i < length; i++) {
             result.append(", ").append(items[i]);

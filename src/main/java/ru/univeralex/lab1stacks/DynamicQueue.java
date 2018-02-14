@@ -4,32 +4,15 @@ import ru.univeralex.lab1stacks.api.IQueue;
 import ru.univeralex.lab1stacks.exceptions.QueueIsEmptyException;
 
 public class DynamicQueue implements IQueue {
-    class QueueElement {
-        int value;
-        QueueElement previousQueueElement;
-
-        QueueElement nextQueueElement;
-
-        QueueElement(int value, QueueElement previousQueueElement) {
-            this.value = value;
-            this.previousQueueElement = previousQueueElement;
+    @Override
+    public String getElementsString() {
+        QueueElement current = first.getNextQueueElement();
+        StringBuilder result = new StringBuilder(String.valueOf(first.getValue()));
+        while (current != null) {
+            result.append(", ").append(current.getValue());
+            current = current.getNextQueueElement();
         }
-
-        private int getValue() {
-            return value;
-        }
-        private QueueElement getPreviousQueueElement() {
-            return previousQueueElement;
-        }
-
-        private QueueElement getNextQueueElement() {
-            return nextQueueElement;
-        }
-
-        private void setNextQueueElement(QueueElement nextQueueElement) {
-            this.nextQueueElement = nextQueueElement;
-        }
-
+        return result.toString();
     }
 
     private QueueElement first;
@@ -63,14 +46,32 @@ public class DynamicQueue implements IQueue {
         throw new UnsupportedOperationException("Can't check is full or not for dynamic queue!");
     }
 
-    @Override
-    public String getElementsString() {
-        QueueElement current = first.getNextQueueElement();
-        StringBuilder result = new StringBuilder(String.valueOf(first.getValue()));
-        while(current != null) {
-            result.append(", ").append(current.getValue());
-            current = current.getNextQueueElement();
+    class QueueElement {
+        int value;
+        QueueElement previousQueueElement;
+
+        QueueElement nextQueueElement;
+
+        QueueElement(int value, QueueElement previousQueueElement) {
+            this.value = value;
+            this.previousQueueElement = previousQueueElement;
         }
-        return result.toString();
+
+        private int getValue() {
+            return value;
+        }
+
+        private QueueElement getPreviousQueueElement() {
+            return previousQueueElement;
+        }
+
+        private QueueElement getNextQueueElement() {
+            return nextQueueElement;
+        }
+
+        private void setNextQueueElement(QueueElement nextQueueElement) {
+            this.nextQueueElement = nextQueueElement;
+        }
+
     }
 }

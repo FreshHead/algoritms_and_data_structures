@@ -13,7 +13,7 @@ public interface IList {
 
     int findFirst(int value) throws NoSuchItemException;
 
-    String getListItemValues();
+    String getItemValues();
 
     boolean isEmpty();
 
