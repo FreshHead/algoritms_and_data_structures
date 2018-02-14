@@ -18,7 +18,7 @@ public class BidirectionalList implements IList {
         }
 
         for (int i = 0; i < index; i++) {
-            if (current.next == null)
+            if (current.next == head)
                 throw new NoSuchItemException("Can't insert before element with index: " + index + ". No such index!");
             current = current.next;
         }
@@ -29,7 +29,21 @@ public class BidirectionalList implements IList {
 
     @Override
     public void insertAfter(int index, int value) throws NoSuchItemException, ListIsFullException {
+        ListItem current = head;
+        if (head == null) {
+            head = new ListItem(value);
+            head.next = head;
+            head.prev = head;
+            return;
+        }
+        for (int i = 0; i < index; i++) {
+            if (current.next == head)
+                throw new NoSuchItemException("Can't insert after element with index: " + index + ". No such index!");
+            current = current.next;
+        }
 
+        current.next = new ListItem(value, current, current.next);
+        current.next.next.prev = current.next;
 
     }
 
@@ -40,7 +54,15 @@ public class BidirectionalList implements IList {
 
     @Override
     public int findFirst(int value) throws NoSuchItemException {
-        return 0;
+        ListItem current = head;
+        int index = 0;
+        while (current != head) {
+            if (current.value == value)
+                return index;
+            index++;
+            current = current.next;
+        }
+        throw new NoSuchItemException("Can't find item with value:" + value);
     }
 
     public int findFirstInReverse(int value) throws NoSuchItemException {
@@ -59,9 +81,9 @@ public class BidirectionalList implements IList {
     }
 
     public String getItemValuesInReverse() {
-        ListItem current = head;
-        StringBuilder stringBuilder = new StringBuilder().append(head.value);
-        while (current.prev != head) {
+        ListItem current = head.prev;
+        StringBuilder stringBuilder = new StringBuilder().append(head.prev.value);
+        while (current.prev != head.prev) {
             current = current.prev;
             stringBuilder.append(", ").append(current.value);
         }
@@ -70,7 +92,7 @@ public class BidirectionalList implements IList {
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return head == null;
     }
 
     @Override
