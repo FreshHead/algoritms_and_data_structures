@@ -56,12 +56,12 @@ public class BidirectionalList implements IList {
     public int findFirst(int value) throws NoSuchItemException {
         ListItem current = head;
         int index = 0;
-        while (current != head) {
+        do {
             if (current.value == value)
                 return index;
             index++;
             current = current.next;
-        }
+        } while (current != head);
         throw new NoSuchItemException("Can't find item with value:" + value);
     }
 
