@@ -4,7 +4,7 @@ import ru.univeralex.lab2lists.api.IList;
 import ru.univeralex.lab2lists.exceptions.NoSuchItemException;
 
 public class DynamicList implements IList {
-    private ListItem head;
+    public ListItem head;
 
     @Override
     public void insertBefore(int index, int value) throws NoSuchItemException {
@@ -101,18 +101,6 @@ public class DynamicList implements IList {
         return false;
     }
 
-    class ListItem {
-        int value;
-        ListItem next;
 
-        ListItem(int value) {
-            this.value = value;
-        }
-
-        ListItem(int value, ListItem next) {
-            this.value = value;
-            this.next = next;
-        }
-    }
 
 }
