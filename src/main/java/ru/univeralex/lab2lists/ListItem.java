@@ -4,11 +4,11 @@ public class ListItem {
     int value;
     ListItem next;
 
-    ListItem(int value) {
+    public ListItem(int value) {
         this.value = value;
     }
 
-    ListItem(int value, ListItem next) {
+    public ListItem(int value, ListItem next) {
         this.value = value;
         this.next = next;
     }

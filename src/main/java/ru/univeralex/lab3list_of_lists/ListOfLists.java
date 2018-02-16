@@ -9,7 +9,28 @@ public class ListOfLists {
     private ListOfListsItem head;
 
     public void insertBefore(int index, int subIndex, int value) throws ListIsFullException, NoSuchItemException {
+        ListOfListsItem current = head;
+        for (int i = 0; i < index; i++) {
+            current = current.next;
+        }
 
+        ListItem subCurrent = head.subList.head;
+        ListItem previous = null;
+        if (head.subList.head == null) {
+            head.subList.head = new ListItem(value);
+            return;
+        }
+        if (subIndex == 0) {
+            head.subList.head = new ListItem(value, head.subList.head);
+            return;
+        }
+        for (int i = 0; i < index; i++) {
+            if (subCurrent.getNext() == null)
+                throw new NoSuchItemException("Can't insert before element with index: " + index + ". No such index!");
+            previous = subCurrent;
+            subCurrent = subCurrent.getNext();
+        }
+        previous.setNext(new ListItem(value, subCurrent));
     }
 
     public void insertAfter(int index, int subIndex, int value) throws NoSuchItemException, ListIsFullException {
