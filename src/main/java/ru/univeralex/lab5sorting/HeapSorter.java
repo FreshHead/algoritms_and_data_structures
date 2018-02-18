@@ -10,7 +10,8 @@ public class HeapSorter implements Sorter {
     public int[] getSorted(int[] array) {
         int[] sortingArray = Arrays.copyOf(array, array.length);
         int N = sortingArray.length;
-        for (int k = N / 2; k > 0; k--) sink(sortingArray, k, sortingArray.length - 1);
+        for (int k = N / 2; k >= 0; k--)
+            sink(sortingArray, k, sortingArray.length);
         while (N > 0) {
             ArrayUtils.swap(sortingArray, 0, --N);
             sink(sortingArray, 0, N);
