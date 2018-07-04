@@ -1,11 +1,13 @@
 package ru.univeralex.lab1stacks;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import ru.univeralex.lab1stacks.api.IStack;
 import ru.univeralex.lab1stacks.exceptions.StackIsEmptyException;
 import ru.univeralex.lab1stacks.exceptions.StackIsFullException;
 
+@Ignore
 public class AbstractStackTest {
 
     protected IStack emptyStack;

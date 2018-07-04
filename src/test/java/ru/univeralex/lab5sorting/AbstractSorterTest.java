@@ -1,10 +1,12 @@
 package ru.univeralex.lab5sorting;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import ru.univeralex.lab5sorting.api.Sorter;
 import ru.univeralex.utils.ArrayUtils;
 
+@Ignore
 public class AbstractSorterTest {
     Sorter sorter;
 

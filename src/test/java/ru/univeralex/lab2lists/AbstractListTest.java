@@ -1,11 +1,13 @@
 package ru.univeralex.lab2lists;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import ru.univeralex.lab2lists.api.IList;
 import ru.univeralex.lab2lists.exceptions.ListIsFullException;
 import ru.univeralex.lab2lists.exceptions.NoSuchItemException;
 
+@Ignore
 public class AbstractListTest {
     protected IList list;
 

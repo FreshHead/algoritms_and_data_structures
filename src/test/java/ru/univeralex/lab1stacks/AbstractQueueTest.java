@@ -1,11 +1,13 @@
 package ru.univeralex.lab1stacks;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import ru.univeralex.lab1stacks.api.IQueue;
 import ru.univeralex.lab1stacks.exceptions.QueueIsEmptyException;
 import ru.univeralex.lab1stacks.exceptions.QueueIsFullException;
 
+@Ignore
 public class AbstractQueueTest {
     IQueue emptyQueue;
 
