@@ -6,6 +6,7 @@ import ru.univeralex.lab1stacks.exceptions.QueueIsEmptyException;
 import ru.univeralex.lab1stacks.exceptions.QueueIsFullException;
 import ru.univeralex.lab1stacks.exceptions.StackIsEmptyException;
 import ru.univeralex.lab1stacks.exceptions.StackIsFullException;
+import ru.univeralex.lab1stacks.wrapper.WrappedStaticStack;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -23,7 +24,7 @@ public class Main {
             switch (bufferedReader.readLine()) {
                 case "1":
                     System.out.println("Enter size of stack:");
-                    workWithStack(new StaticStack(Integer.parseInt(bufferedReader.readLine())));
+                    workWithStack(new WrappedStaticStack(Integer.parseInt(bufferedReader.readLine())));
                     break;
                 case "2":
                     workWithStack(new DynamicStack());

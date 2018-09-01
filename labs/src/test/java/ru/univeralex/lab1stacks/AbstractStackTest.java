@@ -8,17 +8,16 @@ import ru.univeralex.lab1stacks.exceptions.StackIsFullException;
 
 import java.util.EmptyStackException;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.*;
 
 @Ignore
 public class AbstractStackTest {
 
-    protected IStack emptyStack;
+    IStack emptyStack;
 
     @Test
     public void IsEmptyTest(){
-        assertEquals(this.emptyStack.isEmpty(), true);
+        assertTrue(this.emptyStack.isEmpty());
     }
 
     @Test
@@ -31,7 +30,7 @@ public class AbstractStackTest {
     public void popTest() throws StackIsFullException, StackIsEmptyException {
         this.emptyStack.push(1);
         assertEquals(1, this.emptyStack.pop());
-        assertEquals(true, this.emptyStack.isEmpty());
+        assertTrue(this.emptyStack.isEmpty());
     }
 
     @Test

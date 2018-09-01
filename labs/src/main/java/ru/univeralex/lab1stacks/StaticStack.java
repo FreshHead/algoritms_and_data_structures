@@ -1,50 +1,51 @@
 package ru.univeralex.lab1stacks;
 
-import ru.univeralex.lab1stacks.api.IStack;
 import ru.univeralex.lab1stacks.exceptions.StackIsFullException;
 
 import java.util.EmptyStackException;
 
-public class StaticStack implements IStack {
+public class StaticStack<E> {
     private int pointer;
     private int size;
-    private int[] elements;
+    private Object[] elements;
 
-    StaticStack(int size) {
+    public StaticStack(int size) {
         this.pointer = -1;
         this.size = size;
-        this.elements = new int[size];
+        this.elements = new Object[size];
     }
 
-    @Override
-    public void push(int value) throws StackIsFullException {
+    public void push(E item) throws StackIsFullException {
         if(this.isFull()) {
-            throw new StackIsFullException("Can't push value: " + value + " because stack is full.");
+            throw new StackIsFullException("Can't push item: " + item.toString() + " because stack is full.");
         }
-        this.elements[++this.pointer] = value;
+        this.elements[++this.pointer] = item;
     }
 
-    @Override
-    public int pop() throws EmptyStackException {
+    public E pop() throws EmptyStackException {
+        E item = peek();
+        this.pointer--;
+        return item;
+    }
+
+    @SuppressWarnings("unchecked")
+    public E peek() {
         if (this.isEmpty()) {
             throw new EmptyStackException();
         }
-        return this.elements[this.pointer--];
+        return (E) this.elements[this.pointer];
     }
 
-    @Override
     public boolean isEmpty() {
         return this.pointer == -1;
     }
 
-    @Override
     public boolean isFull() {
         return this.pointer + 1 == this.size;
     }
 
-    @Override
     public String getElementsString() {
-        StringBuilder result = new StringBuilder(Integer.toString(elements[pointer]));
+        StringBuilder result = new StringBuilder((elements[pointer].toString()));
         for (int i = pointer - 1; i >= 0; i--) {
             result.append(", ").append(elements[i]);
         }

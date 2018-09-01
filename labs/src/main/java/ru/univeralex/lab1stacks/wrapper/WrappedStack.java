@@ -1,4 +1,4 @@
-package ru.univeralex.lab1stacks;
+package ru.univeralex.lab1stacks.wrapper;
 
 import ru.univeralex.lab1stacks.api.IStack;
 
@@ -6,12 +6,12 @@ import java.util.Stack;
 
 /**
  * Обёртка над java.util.Stack с имплементирующая IStack, чтобы подходить под готовые тесты.
- * Сделана из интереса и для проверки понимая работы стека.
+ * Сделана из интереса и для проверки пониманияя работы стека.
  */
 public class WrappedStack implements IStack {
     private Stack<Integer> stack;
 
-    WrappedStack() {
+    public WrappedStack() {
         this.stack = new Stack<Integer>();
     }
 

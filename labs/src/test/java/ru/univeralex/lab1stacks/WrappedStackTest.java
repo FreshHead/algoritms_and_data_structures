@@ -1,6 +1,7 @@
 package ru.univeralex.lab1stacks;
 
 import org.junit.Before;
+import ru.univeralex.lab1stacks.wrapper.WrappedStack;
 
 /**
  * Запускает тесты для встроенного Stack.
