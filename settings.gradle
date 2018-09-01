@@ -1,0 +1,4 @@
+rootProject.name = 'algoritms_and_data_structures'
+
+include 'coursework'
+include 'labs'

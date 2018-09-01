@@ -13,10 +13,10 @@ public class StaticQueueTest extends AbstractQueueTest{
 
     @Test
     public void isFullTest() throws QueueIsFullException {
-        Assert.assertEquals(false,emptyQueue.isFull());
+        Assert.assertFalse(emptyQueue.isFull());
         for (int i = 0; i < 10; i++) {
             emptyQueue.add(i);
         }
-        Assert.assertEquals(true,emptyQueue.isFull());
+        Assert.assertTrue(emptyQueue.isFull());
     }
 }
