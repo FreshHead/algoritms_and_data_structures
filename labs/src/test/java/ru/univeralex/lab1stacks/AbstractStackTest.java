@@ -1,11 +1,15 @@
 package ru.univeralex.lab1stacks;
 
-import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import ru.univeralex.lab1stacks.api.IStack;
 import ru.univeralex.lab1stacks.exceptions.StackIsEmptyException;
 import ru.univeralex.lab1stacks.exceptions.StackIsFullException;
+
+import java.util.EmptyStackException;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 @Ignore
 public class AbstractStackTest {
@@ -14,20 +18,20 @@ public class AbstractStackTest {
 
     @Test
     public void IsEmptyTest(){
-        Assert.assertEquals(this.emptyStack.isEmpty(), true);
+        assertEquals(this.emptyStack.isEmpty(), true);
     }
 
     @Test
     public void pushTest() throws StackIsFullException {
         this.emptyStack.push(1);
-        Assert.assertEquals( false, this.emptyStack.isEmpty());
+        assertFalse(this.emptyStack.isEmpty());
     }
 
     @Test
     public void popTest() throws StackIsFullException, StackIsEmptyException {
         this.emptyStack.push(1);
-        Assert.assertEquals(1, this.emptyStack.pop());
-        Assert.assertEquals(true, this.emptyStack.isEmpty() );
+        assertEquals(1, this.emptyStack.pop());
+        assertEquals(true, this.emptyStack.isEmpty());
     }
 
     @Test
@@ -39,10 +43,10 @@ public class AbstractStackTest {
         for(int i = 0 ; i < 10; i++){
             elementsString += this.emptyStack.pop() + " ";
         }
-        Assert.assertEquals("9 8 7 6 5 4 3 2 1 0 ", elementsString);
+        assertEquals("9 8 7 6 5 4 3 2 1 0 ", elementsString);
     }
 
-    @Test(expected = StackIsEmptyException.class)
+    @Test(expected = EmptyStackException.class)
     public void TestStackIsEmptyException() throws StackIsEmptyException {
         this.emptyStack.pop();
     }
@@ -52,7 +56,7 @@ public class AbstractStackTest {
         for(int i = 0 ; i < 10; i++){
             this.emptyStack.push(i);
         }
-        Assert.assertEquals("9, 8, 7, 6, 5, 4, 3, 2, 1, 0", this.emptyStack.getElementsString());
+        assertEquals("9, 8, 7, 6, 5, 4, 3, 2, 1, 0", this.emptyStack.getElementsString());
     }
 
 }

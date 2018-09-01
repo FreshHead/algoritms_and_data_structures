@@ -1,7 +1,8 @@
 package ru.univeralex.lab1stacks;
 
 import ru.univeralex.lab1stacks.api.IStack;
-import ru.univeralex.lab1stacks.exceptions.StackIsEmptyException;
+
+import java.util.EmptyStackException;
 
 public class DynamicStack implements IStack {
 
@@ -32,8 +33,8 @@ public class DynamicStack implements IStack {
     }
 
     @Override
-    public int pop() throws StackIsEmptyException {
-        if (isEmpty()) throw new StackIsEmptyException("Can't pop from stack because it is already empty");
+    public int pop() throws EmptyStackException {
+        if (isEmpty()) throw new EmptyStackException();
         int value = pointer.getValue();
         pointer = pointer.getPreviousStackElement();
         return value;

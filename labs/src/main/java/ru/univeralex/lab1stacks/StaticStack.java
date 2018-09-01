@@ -1,8 +1,9 @@
 package ru.univeralex.lab1stacks;
 
 import ru.univeralex.lab1stacks.api.IStack;
-import ru.univeralex.lab1stacks.exceptions.StackIsEmptyException;
 import ru.univeralex.lab1stacks.exceptions.StackIsFullException;
+
+import java.util.EmptyStackException;
 
 public class StaticStack implements IStack {
     private int pointer;
@@ -24,9 +25,9 @@ public class StaticStack implements IStack {
     }
 
     @Override
-    public int pop() throws StackIsEmptyException {
+    public int pop() throws EmptyStackException {
         if (this.isEmpty()) {
-            throw new StackIsEmptyException("Can't pop from stack because it is already empty");
+            throw new EmptyStackException();
         }
         return this.elements[this.pointer--];
     }
