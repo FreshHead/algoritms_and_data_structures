@@ -5,7 +5,7 @@ import ru.univeralex.algoritms_and_data_structures.labs.lab1stacks.api.IStack;
 import java.util.Stack;
 
 /**
- * Обёртка над java.util.Stack с имплементирующая IStack, чтобы подходить под готовые тесты.
+ * Обёртка над java.util.Stack имплементирующая IStack, чтобы подходить под готовые тесты.
  * Сделана из интереса и для проверки пониманияя работы стека.
  */
 public class WrappedStack implements IStack {

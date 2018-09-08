@@ -1,7 +1,6 @@
 package ru.univeralex.algoritms_and_data_structures.labs.lab2lists;
 
 import ru.univeralex.algoritms_and_data_structures.labs.lab2lists.api.IList;
-import ru.univeralex.algoritms_and_data_structures.labs.lab2lists.exceptions.ListIsFullException;
 import ru.univeralex.algoritms_and_data_structures.labs.lab2lists.exceptions.NoSuchItemException;
 
 public class StaticList implements IList {
@@ -15,23 +14,23 @@ public class StaticList implements IList {
     }
 
     @Override
-    public void insertBefore(int index, int value) throws ListIsFullException {
-        if (isFull()) throw new ListIsFullException("Can't insert value: " + value + " because list is full.");
+    public void insertBefore(int index, int value) throws IndexOutOfBoundsException {
+        if (isFull()) throw new IndexOutOfBoundsException("Can't insert value: " + value + " because list is full.");
         shiftToTheRight(index);
         items[index] = value;
         length++;
     }
 
     @Override
-    public void insertAfter(int index, int value) throws ListIsFullException, NoSuchItemException {
-        if (isFull()) throw new ListIsFullException("Can't insert value: " + value + " because list is full.");
+    public void insertAfter(int index, int value) throws IndexOutOfBoundsException {
+        if (isFull()) throw new IndexOutOfBoundsException("Can't insert value: " + value + " because list is full.");
         if (isEmpty()) {
             items[0] = value;
             length++;
             return;
         }
         if (length <= index)
-            throw new NoSuchItemException("No item with index: " + index);
+            throw new IndexOutOfBoundsException("No item with index: " + index);
         if (length != index + 1)
             shiftToTheRight(index);
         items[index + 1] = value;
@@ -43,9 +42,9 @@ public class StaticList implements IList {
     }
 
     @Override
-    public void delete(int index) throws NoSuchItemException {
+    public void delete(int index) throws IndexOutOfBoundsException {
         if (index + 1 > length)
-            throw new NoSuchItemException("Can't delete item with index: " + index + " ! Because this index does not exist.");
+            throw new IndexOutOfBoundsException("Can't delete item with index: " + index + " ! Because this index does not exist.");
         shiftToTheLeft(index);
         length--;
     }
@@ -64,7 +63,7 @@ public class StaticList implements IList {
     }
 
     @Override
-    public String getItemValues() {
+    public String getElementsString() {
         StringBuilder result = new StringBuilder(Integer.toString(items[0]));
         for (int i = 1; i < length; i++) {
             result.append(", ").append(items[i]);

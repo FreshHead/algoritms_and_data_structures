@@ -30,7 +30,7 @@ public class BidirectionalList implements IList {
     }
 
     @Override
-    public void insertAfter(int index, int value) throws NoSuchItemException {
+    public void insertAfter(int index, int value) throws IndexOutOfBoundsException {
         ListItem current = head;
         if (head == null) {
             head = new ListItem(value);
@@ -41,7 +41,7 @@ public class BidirectionalList implements IList {
         }
         for (int i = 0; i < index; i++) {
             if (current.next == head)
-                throw new NoSuchItemException("Can't insert after element with index: " + index + ". No such index!");
+                throw new IndexOutOfBoundsException("Can't insert after element with index: " + index + ". No such index!");
             current = current.next;
         }
 
@@ -51,12 +51,12 @@ public class BidirectionalList implements IList {
     }
 
     @Override
-    public void delete(int index) throws NoSuchItemException {
+    public void delete(int index) throws IndexOutOfBoundsException {
         if (index >= length)
-            throw new NoSuchItemException("Can't delete element with index: " + index + ". No such index!");
+            throw new IndexOutOfBoundsException("Can't delete element with index: " + index + ". No such index!");
         ListItem current = head;
         if (head == null) {
-            throw new NoSuchItemException("Can't delete because list is empty!");
+            throw new IndexOutOfBoundsException("Can't delete because list is empty!");
         }
         if (index == 0) {
             head = null;
@@ -97,7 +97,7 @@ public class BidirectionalList implements IList {
     }
 
     @Override
-    public String getItemValues() {
+    public String getElementsString() {
         ListItem current = head;
         StringBuilder stringBuilder = new StringBuilder().append(head.value);
         while (current.next != head) {

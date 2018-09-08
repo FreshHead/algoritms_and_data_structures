@@ -1,20 +1,22 @@
 package ru.univeralex.algoritms_and_data_structures.labs.lab2lists.api;
 
 
-import ru.univeralex.algoritms_and_data_structures.labs.lab2lists.exceptions.ListIsFullException;
 import ru.univeralex.algoritms_and_data_structures.labs.lab2lists.exceptions.NoSuchItemException;
 
 public interface IList {
 
-    void insertBefore(int index, int value) throws ListIsFullException, NoSuchItemException;
+    void insertBefore(int index, int value) throws IndexOutOfBoundsException, NoSuchItemException;
 
-    void insertAfter(int index, int value) throws NoSuchItemException, ListIsFullException;
+    /*
+     * Don't use in empty list.
+     */
+    void insertAfter(int index, int value) throws NoSuchItemException, IndexOutOfBoundsException;
 
-    void delete(int index) throws NoSuchItemException;
+    void delete(int index);
 
     int findFirst(int value) throws NoSuchItemException;
 
-    String getItemValues();
+    String getElementsString();
 
     boolean isEmpty();
 

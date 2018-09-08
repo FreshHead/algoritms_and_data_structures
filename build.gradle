@@ -1,0 +1,5 @@
+project(':coursework') {
+    dependencies {
+        compile project(':labs')
+    }
+}

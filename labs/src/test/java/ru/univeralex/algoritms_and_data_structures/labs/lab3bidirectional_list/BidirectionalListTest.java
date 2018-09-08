@@ -4,7 +4,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import ru.univeralex.algoritms_and_data_structures.labs.lab2lists.AbstractListTest;
-import ru.univeralex.algoritms_and_data_structures.labs.lab2lists.exceptions.ListIsFullException;
 import ru.univeralex.algoritms_and_data_structures.labs.lab2lists.exceptions.NoSuchItemException;
 
 public class BidirectionalListTest extends AbstractListTest {
@@ -14,7 +13,7 @@ public class BidirectionalListTest extends AbstractListTest {
     }
 
     @Test
-    public void getItemValuesInReverseTest() throws NoSuchItemException, ListIsFullException {
+    public void getItemValuesInReverseTest() throws NoSuchItemException {
         list.insertAfter(0, 1);
         list.insertBefore(0, 0);
         list.insertBefore(0, -1);
@@ -26,15 +25,15 @@ public class BidirectionalListTest extends AbstractListTest {
     }
 
     @Test
-    public void findFirstInReverseTest() throws NoSuchItemException, ListIsFullException {
+    public void findFirstInReverseTest() throws NoSuchItemException {
         list.insertBefore(0, 10);
-        Assert.assertEquals("10", list.getItemValues());
+        Assert.assertEquals("10", list.getElementsString());
         list.insertBefore(0, 12);
-        Assert.assertEquals("12, 10", list.getItemValues());
+        Assert.assertEquals("12, 10", list.getElementsString());
         list.insertBefore(1, 14);
-        Assert.assertEquals("12, 14, 10", list.getItemValues());
+        Assert.assertEquals("12, 14, 10", list.getElementsString());
         list.insertBefore(2, 8);
-        Assert.assertEquals("12, 14, 8, 10", list.getItemValues());
+        Assert.assertEquals("12, 14, 8, 10", list.getElementsString());
         list.insertBefore(3, 12);
         Assert.assertEquals(3, ((BidirectionalList) list).findFirstInReverse(12));
         Assert.assertEquals(1, ((BidirectionalList) list).findFirstInReverse(14));

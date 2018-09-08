@@ -7,7 +7,7 @@ public class DynamicList implements IList {
     public ListItem head;
 
     @Override
-    public void insertBefore(int index, int value) throws NoSuchItemException {
+    public void insertBefore(int index, int value) throws IndexOutOfBoundsException {
         ListItem current = head;
         ListItem previous = null;
         if (head == null) {
@@ -20,7 +20,7 @@ public class DynamicList implements IList {
         }
         for (int i = 0; i < index; i++) {
             if (current.next == null)
-                throw new NoSuchItemException("Can't insert before element with index: " + index + ". No such index!");
+                throw new IndexOutOfBoundsException("Can't insert before element with index: " + index + ". No such index!");
             previous = current;
             current = current.next;
         }
@@ -28,7 +28,7 @@ public class DynamicList implements IList {
     }
 
     @Override
-    public void insertAfter(int index, int value) throws NoSuchItemException {
+    public void insertAfter(int index, int value) throws IndexOutOfBoundsException {
         ListItem current = head;
         if (head == null) {
             head = new ListItem(value);
@@ -36,18 +36,18 @@ public class DynamicList implements IList {
         }
         for (int i = 0; i < index; i++) {
             if (current.next == null)
-                throw new NoSuchItemException("Can't insert after element with index: " + index + ". No such index!");
+                throw new IndexOutOfBoundsException("Can't insert after element with index: " + index + ". No such index!");
             current = current.next;
         }
         current.next = new ListItem(value, current.next);
     }
 
     @Override
-    public void delete(int index) throws NoSuchItemException {
+    public void delete(int index) throws IndexOutOfBoundsException {
         ListItem current = head;
         ListItem previous = null;
         if (head == null) {
-            throw new NoSuchItemException("Can't delete because list is empty!");
+            throw new IndexOutOfBoundsException("Can't delete because list is empty!");
         }
         if (index == 0) {
             head = null;
@@ -55,7 +55,7 @@ public class DynamicList implements IList {
         }
         for (int i = 0; i < index; i++) {
             if (current.next == null)
-                throw new NoSuchItemException("Can't delete element with index: " + index + ". No such index!");
+                throw new IndexOutOfBoundsException("Can't delete element with index: " + index + ". No such index!");
             previous = current;
             current = current.next;
         }
@@ -76,7 +76,7 @@ public class DynamicList implements IList {
     }
 
     @Override
-    public String getItemValues() {
+    public String getElementsString() {
         ListItem current = head;
         StringBuilder stringBuilder = new StringBuilder().append(head.value);
         while (current.next != null) {

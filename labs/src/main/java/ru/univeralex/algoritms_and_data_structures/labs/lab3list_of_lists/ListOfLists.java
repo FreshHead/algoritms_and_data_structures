@@ -32,14 +32,6 @@ public class ListOfLists {
         previous.setNext(new ListItem(value, subCurrent));
     }
 
-    public void insertAfter(int index, int subIndex, int value) {
-
-    }
-
-    public void delete(int index) {
-
-    }
-
     public int findFirst(int value) {
         return 0;
     }
