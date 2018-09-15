@@ -1,13 +1,11 @@
 package ru.univeralex.algoritms_and_data_structures.labs.lab2lists;
 
-import ru.univeralex.algoritms_and_data_structures.labs.lab2lists.api.IList;
 import ru.univeralex.algoritms_and_data_structures.labs.lab2lists.exceptions.NoSuchItemException;
 
-public class DynamicList implements IList {
+public class DynamicList<E> {
     public ListItem head;
 
-    @Override
-    public void insertBefore(int index, int value) throws IndexOutOfBoundsException {
+    public void insertBefore(int index, Object value) throws IndexOutOfBoundsException {
         ListItem current = head;
         ListItem previous = null;
         if (head == null) {
@@ -27,7 +25,6 @@ public class DynamicList implements IList {
         previous.next = new ListItem(value, current);
     }
 
-    @Override
     public void insertAfter(int index, int value) throws IndexOutOfBoundsException {
         ListItem current = head;
         if (head == null) {
@@ -42,7 +39,6 @@ public class DynamicList implements IList {
         current.next = new ListItem(value, current.next);
     }
 
-    @Override
     public void delete(int index) throws IndexOutOfBoundsException {
         ListItem current = head;
         ListItem previous = null;
@@ -62,8 +58,7 @@ public class DynamicList implements IList {
         previous.next = current.next;
     }
 
-    @Override
-    public int findFirst(int value) throws NoSuchItemException {
+    public int findFirst(Object value) throws NoSuchItemException {
         ListItem current = head;
         int index = 0;
         while (current != null) {
@@ -75,7 +70,6 @@ public class DynamicList implements IList {
         throw new NoSuchItemException("Can't find item with value:" + value);
     }
 
-    @Override
     public String getElementsString() {
         ListItem current = head;
         StringBuilder stringBuilder = new StringBuilder().append(head.value);
@@ -86,21 +80,16 @@ public class DynamicList implements IList {
         return stringBuilder.toString();
     }
 
-    @Override
     public boolean isEmpty() {
         return head == null;
     }
 
-    @Override
     public boolean isFull() {
         return false;
     }
 
-    @Override
     public boolean isExist(int element) {
         return false;
     }
-
-
 
 }

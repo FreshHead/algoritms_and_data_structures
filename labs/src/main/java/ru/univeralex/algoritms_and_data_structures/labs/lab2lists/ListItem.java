@@ -1,19 +1,19 @@
 package ru.univeralex.algoritms_and_data_structures.labs.lab2lists;
 
 public class ListItem {
-    int value;
+    Object value;
     ListItem next;
 
-    public ListItem(int value) {
+    public ListItem(Object value) {
         this.value = value;
     }
 
-    public ListItem(int value, ListItem next) {
+    public ListItem(Object value, ListItem next) {
         this.value = value;
         this.next = next;
     }
 
-    public int getValue() {
+    public Object getValue() {
         return value;
     }
 

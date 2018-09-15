@@ -1,12 +1,12 @@
 package ru.univeralex.algoritms_and_data_structures.coursework.model;
 
 
-import java.util.List;
+import ru.univeralex.algoritms_and_data_structures.labs.lab2lists.DynamicList;
 
 /**
  * Организация.
  */
 public class Organization {
     private String name;
-    private List<Branch> branches;
+    private DynamicList<Branch> branches;
 }

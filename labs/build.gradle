@@ -1,17 +1,20 @@
-
-apply plugin: 'java'
-apply plugin: 'eclipse'
-
-group = 'ru.univeralex'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = 1.8
-
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
+
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "io.franzbecker:gradle-lombok:1.14"
+    }
+}
+
+apply plugin: "io.franzbecker.gradle-lombok"
 
 dependencies {
-	testCompile('junit:junit:4.11')
+    testCompile('junit:junit:4.11')
 }
-
-
