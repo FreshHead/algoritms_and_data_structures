@@ -46,9 +46,12 @@ public class StaticStack<E> {
     }
 
     public String getElementsString() {
-        StringBuilder result = new StringBuilder((elements[pointer].toString()));
-        for (int i = pointer - 1; i >= 0; i--) {
-            result.append(", ").append(elements[i]);
+        if (this.pointer == -1) {
+            return "";
+        }
+        StringBuilder result = new StringBuilder((this.elements[this.pointer].toString()));
+        for (int i = this.pointer - 1; i >= 0; i--) {
+            result.append(", ").append(this.elements[i]);
         }
         return result.toString();
     }
