@@ -1,9 +1,10 @@
 package ru.univeralex.algoritms_and_data_structures.coursework.model;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
-import ru.univeralex.algoritms_and_data_structures.coursework.serializer.BranchSerializer;
 import ru.univeralex.algoritms_and_data_structures.labs.lab1stacks.StaticStack;
 
 /**
@@ -11,8 +12,13 @@ import ru.univeralex.algoritms_and_data_structures.labs.lab1stacks.StaticStack;
  */
 @AllArgsConstructor
 @Getter
-@JsonSerialize(using = BranchSerializer.class)
+@Builder
+@JsonDeserialize(builder = Branch.BranchBuilder.class)
 public class Branch {
-    private String name;
-    private StaticStack<Department> departments;
+    public String name;
+    public StaticStack<Department> departments;
+
+    @JsonPOJOBuilder(withPrefix = "")
+    static final class BranchBuilder {
+    }
 }

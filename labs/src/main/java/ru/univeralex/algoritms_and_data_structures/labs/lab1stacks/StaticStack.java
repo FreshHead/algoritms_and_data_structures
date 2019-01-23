@@ -17,7 +17,7 @@ public class StaticStack<E> {
     }
 
     public void push(E item) throws StackIsFullException {
-        if(this.isFull()) {
+        if (this.isFull()) {
             throw new StackIsFullException("Can't push item: " + item.toString() + " because stack is full.");
         }
         this.elements[++this.pointer] = item;

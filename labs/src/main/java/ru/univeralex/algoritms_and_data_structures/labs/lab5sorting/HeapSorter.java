@@ -20,7 +20,6 @@ public class HeapSorter implements Sorter {
     }
 
     private void sink(int[] array, int k, int N) {
-
         while (2 * k + 1 < N) {
             int j = 2 * k + 1;
             if (j + 1 < N && array[j] < array[j + 1]) j++;

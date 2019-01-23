@@ -3,6 +3,9 @@ package ru.univeralex.algoritms_and_data_structures.labs.lab5sorting;
 
 import ru.univeralex.algoritms_and_data_structures.labs.lab5sorting.api.Sorter;
 
+/**
+ * Сортирвка выбором.
+ */
 public class SelectionSorter implements Sorter {
     @Override
     public int[] getSorted(int[] array) {
@@ -11,7 +14,6 @@ public class SelectionSorter implements Sorter {
             int indexOfSmallest = getIndexOfSmallest(array);
             resultArray[i] = array[indexOfSmallest];
             array[indexOfSmallest] = Integer.MAX_VALUE;
-
         }
         return resultArray;
     }
