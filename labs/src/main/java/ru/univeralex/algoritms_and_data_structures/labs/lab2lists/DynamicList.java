@@ -2,6 +2,8 @@ package ru.univeralex.algoritms_and_data_structures.labs.lab2lists;
 
 import ru.univeralex.algoritms_and_data_structures.labs.lab2lists.exceptions.NoSuchItemException;
 
+import java.util.ArrayList;
+
 public class DynamicList<E> {
     public ListItem head;
 
@@ -78,6 +80,17 @@ public class DynamicList<E> {
             stringBuilder.append(", ").append(current.value);
         }
         return stringBuilder.toString();
+    }
+
+    public Object[] toArray() {
+        ListItem current = head;
+        ArrayList<Object> list = new ArrayList<>();
+        list.add(head.value);
+        while (current.next != null) {
+            current = current.next;
+            list.add(current.value);
+        }
+        return list.toArray();
     }
 
     public boolean isEmpty() {

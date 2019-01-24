@@ -39,6 +39,12 @@ public class OrganizationTest {
         departments.push(new Department("Dep1", 10));
         departments.push(new Department("Dep2", 11));
         ObjectMapper objectMapper = new ObjectMapper();
+
+//        Можно сериализовывать структуры данных но это довольно неудобно
+//        SimpleModule module = new SimpleModule();
+//        module.addSerializer(StaticStack.class, new StaticStackSerializer());
+//        objectMapper.registerModule(module);
+
 //        String jsonString = objectMapper.writeValueAsString(branch);
         File file = new File("src/test/resources/test.json");
 

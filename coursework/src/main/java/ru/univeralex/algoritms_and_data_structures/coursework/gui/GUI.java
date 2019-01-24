@@ -32,11 +32,7 @@ public class GUI extends Application {
         if (Optional.ofNullable(file).isPresent()) {
             filename = file.getName();
         }
-        TreeItem<String> rootNode = new TreeItem<>(jsonNode.get("name").asText());
-        Iterator<JsonNode> branchIterator = jsonNode.elements();
-        while (branchIterator.hasNext()) {
-            rootNode.getChildren().add(new TreeItem<>(branchIterator.next().get("name").asText()));
-        }
+        TreeItem<String> rootNode = populateTree(jsonNode);
         TreeView<String> treeView = new TreeView<>(rootNode);
 
         //Setting the title to Stage.
@@ -50,4 +46,15 @@ public class GUI extends Application {
         stage.show();
 
     }
+
+    private TreeItem<String> populateTree(JsonNode jsonNode) {
+        TreeItem<String> rootNode = new TreeItem<>(jsonNode.get("name").asText());
+        Iterator<JsonNode> branchIterator = jsonNode.elements();
+        while (branchIterator.hasNext()) {
+            rootNode.getChildren().add(new TreeItem<>(branchIterator.next().get("name").asText()));
+        }
+        return rootNode;
+    }
+
+
 }

@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 import ru.univeralex.algoritms_and_data_structures.coursework.model.Branch;
 import ru.univeralex.algoritms_and_data_structures.coursework.model.Department;
-import ru.univeralex.algoritms_and_data_structures.labs.lab1stacks.StaticStack;
 
 import java.io.IOException;
 
@@ -15,6 +14,9 @@ public class BranchSerializer extends StdSerializer<Branch> {
         super(t);
     }
 
+    /*
+    Конструктор нужен для JsonMapper
+     */
     public BranchSerializer() {
         this(null);
     }
@@ -23,15 +25,17 @@ public class BranchSerializer extends StdSerializer<Branch> {
     public void serialize(Branch value, JsonGenerator gen, SerializerProvider provider) throws IOException {
         gen.writeStartObject();
         gen.writeStringField("name", value.getName());
-        StaticStack<Department> departments = value.getDepartments();
+        Object[] departments = value.getDepartments().getElements();
         gen.writeArrayFieldStart("departments");
-        while (!departments.isEmpty()) {
-            gen.writeStartObject();
-            Department department = departments.pop();
-            gen.writeStringField("name", department.getName());
-            gen.writeNumberField("employee_number", department.getEmployeesNumber());
-            gen.writeEndObject();
+        for (Object department : departments) {
+            if (department != null) {
+                gen.writeStartObject();
+                gen.writeStringField("name", ((Department) department).getName());
+                gen.writeNumberField("employee_number", ((Department) department).getEmployeesNumber());
+                gen.writeEndObject();
+            }
         }
+
         gen.writeEndArray();
         gen.writeEndObject();
     }

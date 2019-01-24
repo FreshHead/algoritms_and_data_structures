@@ -8,6 +8,11 @@ import java.util.EmptyStackException;
 public class StaticStack<E> {
     private int pointer;
     private int size;
+
+    public Object[] getElements() {
+        return elements;
+    }
+
     private Object[] elements;
 
     public StaticStack(int size) {
