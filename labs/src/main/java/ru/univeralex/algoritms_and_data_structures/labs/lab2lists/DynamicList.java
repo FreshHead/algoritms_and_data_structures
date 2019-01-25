@@ -27,7 +27,17 @@ public class DynamicList<E> {
         previous.next = new ListItem(value, current);
     }
 
-    public void insertAfter(int index, int value) throws IndexOutOfBoundsException {
+    public void insert(Object value) {
+        ListItem current = head;
+        int index = 0;
+        while (current != null) {
+            index++;
+            current = current.next;
+        }
+        insertAfter(index - 1, value);
+    }
+
+    public void insertAfter(int index, Object value) throws IndexOutOfBoundsException {
         ListItem current = head;
         if (head == null) {
             head = new ListItem(value);

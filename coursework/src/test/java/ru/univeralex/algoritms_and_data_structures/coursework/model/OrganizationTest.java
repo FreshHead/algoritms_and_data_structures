@@ -32,9 +32,11 @@ public class OrganizationTest {
     @Test
     public void jsonTest() throws StackIsFullException, IOException {
         StaticStack<Department> departments = new StaticStack<>(10);
-        Branch branch = new Branch("Branch1", departments);
+        Branch branch1 = new Branch("Branch1", departments);
+        Branch branch2 = new Branch("Branch2", departments);
         DynamicList<Branch> branches = new DynamicList<>();
-        branches.insertBefore(0, branch);
+        branches.insertBefore(0, branch1);
+        branches.insert(branch2);
         Organization organization = new Organization("ООО Тест", branches);
         departments.push(new Department("Dep1", 10));
         departments.push(new Department("Dep2", 11));

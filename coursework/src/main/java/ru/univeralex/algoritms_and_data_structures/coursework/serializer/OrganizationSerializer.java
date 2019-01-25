@@ -28,7 +28,6 @@ public class OrganizationSerializer extends StdSerializer<Organization> {
         gen.writeArrayFieldStart("branches");
 
         for (Object branch : branches) {
-
             gen.writeObject(branch);
         }
         gen.writeEndArray();
