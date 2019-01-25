@@ -25,30 +25,28 @@ import ru.univeralex.algoritms_and_data_structures.labs.lab2lists.DynamicList;
 import ru.univeralex.algoritms_and_data_structures.labs.lab2lists.exceptions.NoSuchItemException;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
 public class GUI extends Application {
-    private TreeView<String> branchTreeView;
+    private TreeView<String> branchTreeView = new TreeView<>();
     private TableView<Department> departmentView = new TableView<>();
     private Branch selectedBranch;
     private Organization organization;
     private TextField depNameTextField = new TextField();
     private TextField depEmployeesNumberTextField = new TextField();
     private TextField branchTextField = new TextField();
+    private Stage stage;
 
     public static void main(String args[]) {
         launch(args);
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Выберите организацию");
-        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("JSON", "*.json"));
-
-        File file = fileChooser.showOpenDialog(stage);
-        ObjectMapper objectMapper = new ObjectMapper();
+    public void start(Stage stage) {
+        this.stage = stage;
+        createEmpty();
 
         TableColumn nameCol = new TableColumn("Название");
         nameCol.setMinWidth(100);
@@ -60,16 +58,8 @@ public class GUI extends Application {
 
         departmentView.getColumns().addAll(nameCol, employeesNumberCol);
 
-        organization = objectMapper.readValue(file, Organization.class);
-        String filename = "Файл не выбран!";
-        if (Optional.ofNullable(file).isPresent()) {
-            filename = file.getName();
-        }
-        TreeItem<String> rootNode = populateRootNode(organization);
-        branchTreeView = new TreeView<>(rootNode);
         EventHandler<MouseEvent> mouseEventHandle = this::handleMouseClicked;
         branchTreeView.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEventHandle);
-        stage.setTitle("Курсовая Костарев: " + filename);
         Button addDepButton = new Button("Добавить отделение");
 
         addDepButton.setOnAction((ActionEvent e) -> {
@@ -77,6 +67,8 @@ public class GUI extends Application {
                 StaticStack<Department> departments = selectedBranch.getDepartments();
                 int employeesNumber = Integer.parseInt(depEmployeesNumberTextField.getText());
                 Department addedDepartment = new Department(depNameTextField.getText(), employeesNumber);
+                depEmployeesNumberTextField.clear();
+                depNameTextField.clear();
                 try {
                     departments.push(addedDepartment);
                 } catch (StackIsFullException e1) {
@@ -99,6 +91,7 @@ public class GUI extends Application {
         addBranchButton.setOnAction((ActionEvent e) -> {
             DynamicList<Branch> branches = organization.getBranches();
             Branch addedBranch = new Branch(branchTextField.getText(), new StaticStack<>(20));
+            branchTextField.clear();
             if (selectedBranch != null) {
                 try {
                     branches.insertAfter(branches.findFirst(selectedBranch), addedBranch);
@@ -123,7 +116,26 @@ public class GUI extends Application {
             }
             branchTreeView.setRoot(populateRootNode(organization));
         });
+        Menu menuFile = new Menu("Файл");
+        MenuBar menuBar = new MenuBar();
 
+        MenuItem createEmpty = new MenuItem("Создать новый");
+        createEmpty.setOnAction((ActionEvent e) -> {
+            createEmpty();
+        });
+
+        MenuItem openItem = new MenuItem("Открыть");
+        openItem.setOnAction((ActionEvent e) -> {
+            open();
+        });
+
+        MenuItem saveItem = new MenuItem("Сохранить");
+        saveItem.setOnAction((ActionEvent e) -> {
+            save();
+        });
+
+        menuFile.getItems().addAll(createEmpty, openItem, saveItem);
+        menuBar.getMenus().addAll(menuFile);
 //      placement
         HBox branchButtonBox = new HBox(addBranchButton, deleteBranchButton);
 
@@ -131,12 +143,53 @@ public class GUI extends Application {
         HBox depButtonBox = new HBox(addDepButton, deleteDepButton);
         VBox branchBox = new VBox(branchTextField, branchButtonBox, branchTreeView);
         VBox departmentBox = new VBox(depTextFieldBox, depButtonBox, departmentView);
-        HBox mainBox = new HBox(branchBox, departmentBox);
+        HBox subMainBox = new HBox(branchBox, departmentBox);
+        VBox mainBox = new VBox(menuBar, subMainBox);
 
         final Scene scene = new Scene(mainBox);
         stage.setScene(scene);
         //Displaying the stage
         stage.show();
+    }
+
+    private void open() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Выберите организацию");
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("JSON", "*.json"));
+
+        File file = fileChooser.showOpenDialog(stage);
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        try {
+            organization = objectMapper.readValue(file, Organization.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String filename = "Файл не выбран!";
+        if (Optional.ofNullable(file).isPresent()) {
+            filename = file.getName();
+        }
+        stage.setTitle("Курсовая Костарев: " + filename);
+        TreeItem<String> rootNode = populateRootNode(organization);
+        branchTreeView.setRoot(rootNode);
+        departmentView.setItems(FXCollections.observableArrayList());
+    }
+
+    private void createEmpty() {
+        branchTreeView.setRoot(null);
+        departmentView.setItems(FXCollections.observableArrayList());
+    }
+
+    private void save() {
+        FileChooser fileChooser1 = new FileChooser();
+        fileChooser1.setTitle("Save Image");
+        File file = fileChooser1.showSaveDialog(stage);
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            objectMapper.writeValue(file, organization);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void handleMouseClicked(MouseEvent event) {
