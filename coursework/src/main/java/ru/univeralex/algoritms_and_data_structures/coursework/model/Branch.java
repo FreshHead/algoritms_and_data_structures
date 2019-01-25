@@ -22,4 +22,9 @@ public class Branch {
     @JsonPOJOBuilder(withPrefix = "")
     static final class BranchBuilder {
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

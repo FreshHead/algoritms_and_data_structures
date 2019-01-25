@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class DynamicList<E> {
     public ListItem head;
 
-    public void insertBefore(int index, Object value) throws IndexOutOfBoundsException {
+    public void insertBefore(int index, E value) throws IndexOutOfBoundsException {
         ListItem current = head;
         ListItem previous = null;
         if (head == null) {
@@ -27,7 +27,7 @@ public class DynamicList<E> {
         previous.next = new ListItem(value, current);
     }
 
-    public void insert(Object value) {
+    public void insert(E value) {
         ListItem current = head;
         int index = 0;
         while (current != null) {
@@ -37,7 +37,7 @@ public class DynamicList<E> {
         insertAfter(index - 1, value);
     }
 
-    public void insertAfter(int index, Object value) throws IndexOutOfBoundsException {
+    public void insertAfter(int index, E value) throws IndexOutOfBoundsException {
         ListItem current = head;
         if (head == null) {
             head = new ListItem(value);
@@ -70,7 +70,7 @@ public class DynamicList<E> {
         previous.next = current.next;
     }
 
-    public int findFirst(Object value) throws NoSuchItemException {
+    public int findFirst(E value) throws NoSuchItemException {
         ListItem current = head;
         int index = 0;
         while (current != null) {
@@ -115,4 +115,15 @@ public class DynamicList<E> {
         return false;
     }
 
+    public E findFirstByToString(String toString) {
+        ListItem current = head;
+        int index = 0;
+        while (current != null) {
+            if (current.value.toString().equals(toString))
+                return (E) current.value;
+            index++;
+            current = current.next;
+        }
+        return null;
+    }
 }

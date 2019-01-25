@@ -31,7 +31,7 @@ public class BranchSerializer extends StdSerializer<Branch> {
             if (department != null) {
                 gen.writeStartObject();
                 gen.writeStringField("name", ((Department) department).getName());
-                gen.writeNumberField("employee_number", ((Department) department).getEmployeesNumber());
+                gen.writeNumberField("employees_number", ((Department) department).getEmployeesNumber());
                 gen.writeEndObject();
             }
         }
