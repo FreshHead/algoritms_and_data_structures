@@ -21,6 +21,8 @@ import ru.univeralex.algoritms_and_data_structures.coursework.model.Department;
 import ru.univeralex.algoritms_and_data_structures.coursework.model.Organization;
 import ru.univeralex.algoritms_and_data_structures.labs.lab1stacks.StaticStack;
 import ru.univeralex.algoritms_and_data_structures.labs.lab1stacks.exceptions.StackIsFullException;
+import ru.univeralex.algoritms_and_data_structures.labs.lab2lists.DynamicList;
+import ru.univeralex.algoritms_and_data_structures.labs.lab2lists.exceptions.NoSuchItemException;
 
 import java.io.File;
 import java.util.List;
@@ -31,8 +33,10 @@ public class GUI extends Application {
     private TableView<Department> departmentView = new TableView<>();
     private Branch selectedBranch;
     private Organization organization;
-    private TextField depNameTextField;
-    private TextField depEmployeesNumberTextField;
+    private TextField depNameTextField = new TextField();
+    private TextField depEmployeesNumberTextField = new TextField();
+    private TextField branchTextField = new TextField();
+
     public static void main(String args[]) {
         launch(args);
     }
@@ -61,39 +65,75 @@ public class GUI extends Application {
         if (Optional.ofNullable(file).isPresent()) {
             filename = file.getName();
         }
-        TreeItem<String> rootNode = populateTree(organization);
+        TreeItem<String> rootNode = populateRootNode(organization);
         branchTreeView = new TreeView<>(rootNode);
         EventHandler<MouseEvent> mouseEventHandle = this::handleMouseClicked;
         branchTreeView.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEventHandle);
         stage.setTitle("Курсовая Костарев: " + filename);
-        depNameTextField = new TextField();
-        depEmployeesNumberTextField = new TextField();
-        Button addButton = new Button("Добавить отделение");
-        addButton.setOnAction((ActionEvent e) -> {
-            StaticStack<Department> departments = selectedBranch.getDepartments();
-            int employeesNumber = Integer.parseInt(depEmployeesNumberTextField.getText());
-            Department addedDepartment = new Department(depNameTextField.getText(), employeesNumber);
+        Button addDepButton = new Button("Добавить отделение");
+
+        addDepButton.setOnAction((ActionEvent e) -> {
+            if (selectedBranch != null) {
+                StaticStack<Department> departments = selectedBranch.getDepartments();
+                int employeesNumber = Integer.parseInt(depEmployeesNumberTextField.getText());
+                Department addedDepartment = new Department(depNameTextField.getText(), employeesNumber);
+                try {
+                    departments.push(addedDepartment);
+                } catch (StackIsFullException e1) {
+                    e1.printStackTrace();
+                }
+                populateDepartmentView();
+            }
+        });
+
+        Button deleteDepButton = new Button("Удалить отделение");
+        deleteDepButton.setOnAction((ActionEvent e) -> {
+            if (selectedBranch != null) {
+                StaticStack<Department> departments = selectedBranch.getDepartments();
+                departments.pop();
+                populateDepartmentView();
+            }
+        });
+
+        Button addBranchButton = new Button("Добавить филиал");
+        addBranchButton.setOnAction((ActionEvent e) -> {
+            DynamicList<Branch> branches = organization.getBranches();
+            Branch addedBranch = new Branch(branchTextField.getText(), new StaticStack<>(20));
+            if (selectedBranch != null) {
+                try {
+                    branches.insertAfter(branches.findFirst(selectedBranch), addedBranch);
+                } catch (NoSuchItemException e1) {
+                    e1.printStackTrace();
+                }
+            } else {
+                branches.insertBefore(0, addedBranch);
+            }
+            branchTreeView.setRoot(populateRootNode(organization));
+        });
+
+        Button deleteBranchButton = new Button("Удалить филиал");
+        deleteBranchButton.setOnAction((ActionEvent e) -> {
+            DynamicList<Branch> branches = organization.getBranches();
             try {
-                departments.push(addedDepartment);
-            } catch (StackIsFullException e1) {
+                int selectedBranchIndex = branches.findFirst(selectedBranch);
+                branches.delete(selectedBranchIndex);
+                selectedBranch = null;
+            } catch (NoSuchItemException e1) {
                 e1.printStackTrace();
             }
-            populateDepartmentView();
-        });
-        Button deleteButton = new Button("Удалить отделение");
-        deleteButton.setOnAction((ActionEvent e) -> {
-            StaticStack<Department> departments = selectedBranch.getDepartments();
-            departments.pop();
-            populateDepartmentView();
+            branchTreeView.setRoot(populateRootNode(organization));
         });
 
 //      placement
-        HBox textFieldBox = new HBox(depNameTextField, depEmployeesNumberTextField);
-        HBox buttonBox = new HBox(addButton, deleteButton);
-        VBox departmentBox = new VBox(textFieldBox, buttonBox, departmentView);
-        HBox mainBox = new HBox(branchTreeView, departmentBox);
+        HBox branchButtonBox = new HBox(addBranchButton, deleteBranchButton);
 
-        final Scene scene = new Scene(mainBox, 400, 300);
+        HBox depTextFieldBox = new HBox(depNameTextField, depEmployeesNumberTextField);
+        HBox depButtonBox = new HBox(addDepButton, deleteDepButton);
+        VBox branchBox = new VBox(branchTextField, branchButtonBox, branchTreeView);
+        VBox departmentBox = new VBox(depTextFieldBox, depButtonBox, departmentView);
+        HBox mainBox = new HBox(branchBox, departmentBox);
+
+        final Scene scene = new Scene(mainBox);
         stage.setScene(scene);
         //Displaying the stage
         stage.show();
@@ -105,7 +145,9 @@ public class GUI extends Application {
         if (node instanceof Text || (node instanceof TreeCell && ((TreeCell) node).getText() != null)) {
             String name = (String) ((TreeItem) branchTreeView.getSelectionModel().getSelectedItem()).getValue();
             selectedBranch = organization.getBranches().findFirstByToString(name);
-            populateDepartmentView();
+            if (selectedBranch != null) {
+                populateDepartmentView();
+            }
         }
     }
 
@@ -119,13 +161,14 @@ public class GUI extends Application {
         }
     }
 
-    private TreeItem<String> populateTree(Organization organization) {
+    private TreeItem<String> populateRootNode(Organization organization) {
         TreeItem<String> rootNode = new TreeItem<>(organization.getName());
         Object[] branches = organization.getBranches().toArray();
         for (Object branch : branches) {
             TreeItem<String> item = new TreeItem<>(((Branch) branch).getName());
             rootNode.getChildren().add(item);
         }
+        rootNode.setExpanded(true);
         return rootNode;
     }
 

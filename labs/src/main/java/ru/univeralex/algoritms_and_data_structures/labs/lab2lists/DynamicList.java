@@ -58,7 +58,7 @@ public class DynamicList<E> {
             throw new IndexOutOfBoundsException("Can't delete because list is empty!");
         }
         if (index == 0) {
-            head = null;
+            head = head.next;
             return;
         }
         for (int i = 0; i < index; i++) {
@@ -95,10 +95,12 @@ public class DynamicList<E> {
     public Object[] toArray() {
         ListItem current = head;
         ArrayList<Object> list = new ArrayList<>();
-        list.add(head.value);
-        while (current.next != null) {
-            current = current.next;
+        if (current != null) {
             list.add(current.value);
+            while (current.next != null) {
+                current = current.next;
+                list.add(current.value);
+            }
         }
         return list.toArray();
     }
